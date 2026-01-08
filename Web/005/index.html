@@ -7,6 +7,10 @@
       <meta name="language" content="zh-CN">
       <meta name="github" content="https://github.com/sun0225SUN/Awesome-Love-Code">
       <meta name="describe" content="">
+      <!-- 缓存控制 -->
+      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+      <meta http-equiv="Pragma" content="no-cache">
+      <meta http-equiv="Expires" content="0">
       <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
       <link rel="stylesheet" href="css/demo.css" />
       <style>
@@ -232,10 +236,58 @@
 
             <footer>
                   <p>❤️ 用心收藏每一份美好 ❤️</p>
+                  <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">
+                    <a href="refresh.html" style="color: #ffd700; text-decoration: none;">🔄 清除缓存</a>
+                    | 当前版本: v3
+                  </p>
             </footer>
       </div>
 
       <script>
+            // GitHub Pages 缓存控制方案
+            (function() {
+                  const CACHE_VERSION = '2025-01-08-v3';
+                  const currentVersion = localStorage.getItem('cacheVersion');
+                  
+                  // 强制刷新所有资源（添加时间戳）
+                  const timestamp = new Date().getTime();
+                  
+                  // 为视频和音乐添加缓存破坏参数
+                  const video = document.getElementById('introVideo');
+                  if (video) {
+                        const source = video.querySelector('source');
+                        if (source) {
+                              source.src = 'images/v1.mp4?v=' + timestamp;
+                        }
+                  }
+                  
+                  const audio = document.getElementById('audios');
+                  if (audio) {
+                        const source = audio.querySelector('source');
+                        if (source) {
+                              source.src = source.src + '&t=' + timestamp;
+                        }
+                  }
+                  
+                  // 检查版本并清除缓存
+                  if (currentVersion !== CACHE_VERSION) {
+                        // 清除 localStorage
+                        localStorage.clear();
+                        sessionStorage.clear();
+                        
+                        // 清除 Service Worker 缓存
+                        if ('caches' in window) {
+                              caches.keys().then(function(names) {
+                                    return Promise.all(names.map(name => caches.delete(name)));
+                              });
+                        }
+                        
+                        // 更新版本号
+                        localStorage.setItem('cacheVersion', CACHE_VERSION);
+                        console.log('缓存已清除，版本更新至:', CACHE_VERSION);
+                  }
+            })();
+
             // 视频播放完成处理
             const video = document.getElementById('introVideo');
             const videoOverlay = document.getElementById('videoOverlay');
