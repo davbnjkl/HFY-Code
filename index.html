@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HFY-CODE</title>
+    <!-- 缓存控制 -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <style>
         * {
             margin: 0;
@@ -65,6 +69,17 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
         }
+
+        .refresh-link {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 20px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .refresh-link:hover {
+            color: #667eea;
+        }
     </style>
 </head>
 <body>
@@ -75,6 +90,48 @@
             <a href="Web/005/refresh.html">原水小子</a>
             <a href="Web/007">jx宝宝</a>
         </div>
+        <p class="refresh-link" onclick="clearCache()">清除缓存</p>
     </div>
+
+    <script>
+        // 缓存控制
+        (function() {
+            const CACHE_VERSION = '2025-01-08-v1';
+            const currentVersion = localStorage.getItem('homeCacheVersion');
+            
+            // 检查版本并清除缓存
+            if (currentVersion !== CACHE_VERSION) {
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                if ('caches' in window) {
+                    caches.keys().then(function(names) {
+                        return Promise.all(names.map(name => caches.delete(name)));
+                    });
+                }
+                
+                localStorage.setItem('homeCacheVersion', CACHE_VERSION);
+                console.log('主页缓存已清除，版本:', CACHE_VERSION);
+            }
+        })();
+
+        // 手动清除缓存函数
+        function clearCache() {
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            if ('caches' in window) {
+                caches.keys().then(function(names) {
+                    return Promise.all(names.map(name => caches.delete(name)));
+                }).then(() => {
+                    alert('缓存已清除！');
+                    location.reload(true);
+                });
+            } else {
+                alert('缓存已清除！');
+                location.reload(true);
+            }
+        }
+    </script>
 </body>
 </html>
