@@ -1,61 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
       <meta charset="UTF-8">
-      <title>孙源宝宝</title>
+      <title>原水小子收藏馆</title>
       <meta name="language" content="zh-CN">
       <meta name="github" content="https://github.com/sun0225SUN/Awesome-Love-Code">
       <meta name="describe" content="">
       <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
       <link rel="stylesheet" href="css/demo.css" />
-</head>
-
-<body>
       <style>
+            * {
+                  margin: 0;
+                  padding: 0;
+                  box-sizing: border-box;
+            }
+
             body {
-                  height: 720px;
-                  padding: 0px;
-                  margin: 0px;
+                  font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+                  min-height: 100vh;
+                  overflow-x: hidden;
+                  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+
+            /* 视频全屏播放容器 */
+            #videoOverlay {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background: #000;
+                  z-index: 9999;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+            }
+
+            #introVideo {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: contain;
+            }
+
+            /* 主内容区域 */
+            .main-content {
+                  display: none;
+                  min-height: 100vh;
             }
 
             .bj {
-                  height: 100%;
+                  min-height: 100vh;
                   width: 100%;
-                  background-size: 100% 100%;
-                  background-image: url(images/1.jpg);
+                  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(images/1.jpg);
+                  background-size: cover;
+                  background-position: center;
+                  background-attachment: fixed;
             }
 
-            .kg {
-                  height: 300px;
-                  width: 50px;
+            /* 标题样式 */
+            .title-section {
+                  text-align: center;
+                  padding: 80px 20px 40px;
+                  background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+                  backdrop-filter: blur(10px);
+                  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             }
 
-            img {
-                  margin: 50px 50px auto;
+            .title-section h1 {
+                  font-size: 3.5rem;
+                  color: #fff;
+                  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+                  letter-spacing: 4px;
+                  margin-bottom: 15px;
+                  animation: fadeInDown 1s ease-out;
+            }
+
+            .title-section .subtitle {
+                  color: #ffd700;
+                  font-size: 1.2rem;
+                  letter-spacing: 2px;
+            }
+
+            /* 轮播图容器 */
+            .gallery-container {
+                  padding: 50px 20px;
+                  max-width: 1400px;
+                  margin: 0 auto;
+            }
+
+            .gallery-title {
+                  text-align: center;
+                  color: #fff;
+                  font-size: 2rem;
+                  margin-bottom: 30px;
+                  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            }
+
+            /* 图片轮播 */
+            .marquee-wrapper {
+                  overflow: hidden;
+                  background: rgba(255,255,255,0.1);
+                  backdrop-filter: blur(10px);
+                  border-radius: 20px;
+                  padding: 30px 0;
+                  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            }
+
+            .marquee-content {
+                  display: flex;
+                  animation: scroll 30s linear infinite;
+                  white-space: nowrap;
+            }
+
+            .marquee-content:hover {
+                  animation-play-state: paused;
+            }
+
+            .gallery-item {
+                  flex: 0 0 auto;
+                  margin: 0 20px;
+            }
+
+            .gallery-item img {
+                  height: 350px;
+                  width: 350px;
+                  border-radius: 15px;
+                  transition: transform 0.3s ease, box-shadow 0.3s ease;
+                  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            }
+
+            .gallery-item img:hover {
+                  transform: scale(1.05) rotate(2deg);
+                  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            }
+
+            /* 动画 */
+            @keyframes fadeInDown {
+                  from {
+                        opacity: 0;
+                        transform: translateY(-30px);
+                  }
+                  to {
+                        opacity: 1;
+                        transform: translateY(0);
+                  }
+            }
+
+            @keyframes scroll {
+                  0% {
+                        transform: translateX(0);
+                  }
+                  100% {
+                        transform: translateX(-50%);
+                  }
+            }
+
+            /* 底部样式 */
+            footer {
+                  text-align: center;
+                  padding: 30px;
+                  background: rgba(0,0,0,0.8);
+                  color: #fff;
+            }
+
+            footer p {
+                  opacity: 0.8;
+            }
+
+            /* 响应式设计 */
+            @media (max-width: 768px) {
+                  .title-section h1 {
+                        font-size: 2.5rem;
+                  }
+
+                  .gallery-item img {
+                        height: 250px;
+                        width: 250px;
+                  }
             }
       </style>
-      <audio autoplay="autopaly" loop="loop" id="audios" preload="auto">
+</head>
+
+<body>
+      <!-- 视频播放容器 -->
+      <div id="videoOverlay">
+            <video id="introVideo" autoplay muted playsinline>
+                  <source src="images/v1.mp4" type="video/mp4">
+            </video>
+      </div>
+
+      <!-- 背景音乐 -->
+      <audio id="audios" preload="auto">
             <source src="http://music.163.com/song/media/outer/url?id=463840964.mp3" />
       </audio>
-      <div class="bj">
-            <meta charset="UTF-8">
-            <center>
-                  <h1 style="color: red;">原水小子收藏馆</h1>
-            </center>
-            <marquee scrollamout="1" scrolldelay="1">
-                  <div>
-                        <img src="images/1.jpg" height="300" width="300">
-                        <img src="images/2.jpg" height="300" width="300">
-                        <img src="images/3.jpg" height="300" width="300">
-                        <img src="images/4.jpg" height="300" width="300">
-                        <img src="images/5.jpg" height="300" width="300">
-                        <img src="images/6.jpg" height="300" width="300">
-                        <img src="images/7.jpg" height="300" width="300">
-                        <img src="images/8.jpg" height="300" width="300">
+
+      <!-- 主内容区域 -->
+      <div class="main-content">
+            <div class="bj">
+                  <div class="title-section">
+                        <h1>原水小子收藏馆</h1>
+                        <p class="subtitle">✨ 精选美好回忆 ✨</p>
                   </div>
-            </marquee>
+
+                  <div class="gallery-container">
+                        <h2 class="gallery-title">💝 珍藏相册 💝</h2>
+                        <div class="marquee-wrapper">
+                              <div class="marquee-content">
+                                    <!-- 第一组图片 -->
+                                    <div class="gallery-item"><img src="images/1.jpg" alt="图片1"></div>
+                                    <div class="gallery-item"><img src="images/2.jpg" alt="图片2"></div>
+                                    <div class="gallery-item"><img src="images/3.jpg" alt="图片3"></div>
+                                    <div class="gallery-item"><img src="images/4.jpg" alt="图片4"></div>
+                                    <div class="gallery-item"><img src="images/5.jpg" alt="图片5"></div>
+                                    <div class="gallery-item"><img src="images/6.jpg" alt="图片6"></div>
+                                    <div class="gallery-item"><img src="images/7.jpg" alt="图片7"></div>
+                                    <div class="gallery-item"><img src="images/8.jpg" alt="图片8"></div>
+                                    <!-- 第二组图片（实现无缝循环） -->
+                                    <div class="gallery-item"><img src="images/1.jpg" alt="图片1"></div>
+                                    <div class="gallery-item"><img src="images/2.jpg" alt="图片2"></div>
+                                    <div class="gallery-item"><img src="images/3.jpg" alt="图片3"></div>
+                                    <div class="gallery-item"><img src="images/4.jpg" alt="图片4"></div>
+                                    <div class="gallery-item"><img src="images/5.jpg" alt="图片5"></div>
+                                    <div class="gallery-item"><img src="images/6.jpg" alt="图片6"></div>
+                                    <div class="gallery-item"><img src="images/7.jpg" alt="图片7"></div>
+                                    <div class="gallery-item"><img src="images/8.jpg" alt="图片8"></div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+
+            <footer>
+                  <p>❤️ 用心收藏每一份美好 ❤️</p>
+            </footer>
       </div>
+
+      <script>
+            // 视频播放完成处理
+            const video = document.getElementById('introVideo');
+            const videoOverlay = document.getElementById('videoOverlay');
+            const mainContent = document.querySelector('.main-content');
+            const audio = document.getElementById('audios');
+
+            // 尝试播放视频
+            video.play().then(() => {
+                  console.log('视频开始播放');
+            }).catch(error => {
+                  console.log('自动播放被阻止，可能需要用户交互');
+                  // 如果自动播放失败，直接显示主内容
+                  videoOverlay.style.display = 'none';
+                  mainContent.style.display = 'block';
+                  audio.play();
+            });
+
+            // 视频播放结束处理
+            video.addEventListener('ended', function() {
+                  videoOverlay.style.display = 'none';
+                  mainContent.style.display = 'block';
+                  // 播放背景音乐
+                  audio.play().catch(e => console.log('音乐播放需要用户交互'));
+            });
+
+            // 如果视频加载失败，直接显示主内容
+            video.addEventListener('error', function() {
+                  console.log('视频加载失败');
+                  videoOverlay.style.display = 'none';
+                  mainContent.style.display = 'block';
+            });
+
+            // 点击任意位置可以跳过视频
+            videoOverlay.addEventListener('click', function() {
+                  video.pause();
+                  videoOverlay.style.display = 'none';
+                  mainContent.style.display = 'block';
+                  audio.play().catch(e => console.log('音乐播放需要用户交互'));
+            });
+      </script>
 </body>
 
 </html>
