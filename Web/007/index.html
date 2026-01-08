@@ -4,19 +4,21 @@
 <head>
 	<title>cjx宝宝</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
 	<style>
 		html,
 		body {
 			height: 100%;
+			overflow-x: hidden;
 		}
 
 		body {
 			background-color: #000000;
 			margin: 0;
-			font-family: Helvetica, sans-serif;
-			;
+			font-family: Helvetica, Arial, sans-serif;
 			overflow: hidden;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
 		}
 
 		a {
@@ -27,29 +29,36 @@
 			position: absolute;
 			width: 100%;
 			color: #ffffff;
-			padding: 5px;
+			padding: 8px 5px;
 			font-family: Monospace;
-			font-size: 13px;
+			font-size: 11px;
 			font-weight: bold;
 			text-align: center;
 			z-index: 1;
+			pointer-events: none;
 		}
 
 		#menu {
-			position: absolute;
-			bottom: 20px;
+			position: fixed;
+			bottom: 15px;
+			left: 0;
+			right: 0;
 			width: 100%;
 			text-align: center;
+			z-index: 100;
+			padding: 0 10px;
+			box-sizing: border-box;
 		}
 
 		.element {
 			width: 100px;
-			/* 120 160 */
 			height: 100px;
 			box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
 			border: 1px solid rgba(127, 255, 255, 0.25);
 			text-align: center;
-			cursor: default;
+			cursor: pointer;
+			-webkit-tap-highlight-color: transparent;
+			touch-action: manipulation;
 		}
 
 		.element:hover {
@@ -60,6 +69,9 @@
 		.element img {
 			width: 100px;
 			height: 100px;
+			-webkit-user-select: none;
+			user-select: none;
+			-webkit-touch-callout: none;
 		}
 
 		.element .number {
@@ -95,48 +107,61 @@
 			background: transparent;
 			outline: 1px solid rgba(127, 255, 255, 0.75);
 			border: 0px;
-			padding: 5px 10px;
+			padding: 8px 16px;
 			cursor: pointer;
+			font-size: 14px;
+			margin: 0 3px;
+			border-radius: 4px;
+			-webkit-tap-highlight-color: transparent;
+			transition: all 0.3s ease;
 		}
 
 		button:hover {
 			background-color: rgba(0, 255, 255, 0.5);
+			transform: scale(1.05);
 		}
 
 		button:active {
 			color: #000000;
 			background-color: rgba(0, 255, 255, 0.75);
+			transform: scale(0.95);
 		}
 
 		.show_info {
 			position: fixed;
-			background-color: rgba(0, 0, 0, .6);
-			padding: 10px;
-			width: 300px;
+			background-color: rgba(0, 0, 0, .8);
+			padding: 15px;
+			width: 90%;
+			max-width: 320px;
 			margin: 0 auto;
-			left: 0;
-			right: 0;
-			border-radius: 5px;
-			box-shadow: 0 0 10px 0 #fff;
-			top: 30%;
+			left: 5%;
+			right: 5%;
+			border-radius: 10px;
+			box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.3);
+			top: 25%;
+			z-index: 200;
 		}
 
 		.show_info img {
 			display: block;
 			margin: auto;
-			border-radius: 5px;
-			box-shadow: 0 0 10px 0 #888;
+			border-radius: 8px;
+			box-shadow: 0 0 15px 0 #888;
+			max-width: 100%;
 		}
 
 		.show_info .intro {
 			color: #fff;
 			text-indent: 20px;
-			margin-top: 10px;
-			height: 65px;
+			margin-top: 12px;
+			height: auto;
+			min-height: 65px;
 			overflow: hidden;
 			display: -webkit-box;
 			-webkit-line-clamp: 3;
 			-webkit-box-orient: vertical;
+			font-size: 14px;
+			line-height: 1.5;
 		}
 
 		.show_info .info_my {
@@ -162,6 +187,117 @@
 			text-overflow: ellipsis;
 			overflow: hidden;
 			white-space: nowrap;
+		}
+
+		/* 手机端适配 */
+		@media (max-width: 768px) {
+			#info {
+				font-size: 10px;
+				padding: 5px;
+			}
+
+			#menu {
+				bottom: 10px;
+				padding: 0 5px;
+			}
+
+			button {
+				padding: 6px 12px;
+				font-size: 13px;
+				margin: 0 2px;
+			}
+
+			.element {
+				width: 70px;
+				height: 70px;
+				box-shadow: 0px 0px 8px rgba(0, 255, 255, 0.5);
+				border: 1px solid rgba(127, 255, 255, 0.25);
+			}
+
+			.element img {
+				width: 70px;
+				height: 70px;
+			}
+
+			.show_info {
+				width: 85%;
+				left: 7.5%;
+				right: 7.5%;
+				top: 20%;
+				padding: 12px;
+			}
+
+			.show_info img {
+				width: 150px;
+				height: auto;
+			}
+
+			.show_info .intro {
+				font-size: 13px;
+				margin-top: 10px;
+			}
+		}
+
+		@media (max-width: 480px) {
+			#info {
+				display: none;
+			}
+
+			#menu {
+				bottom: 8px;
+			}
+
+			button {
+				padding: 5px 10px;
+				font-size: 12px;
+				margin: 0 1.5px;
+			}
+
+			.element {
+				width: 55px;
+				height: 55px;
+			}
+
+			.element img {
+				width: 55px;
+				height: 55px;
+			}
+
+			.show_info {
+				width: 90%;
+				left: 5%;
+				right: 5%;
+				top: 15%;
+				padding: 10px;
+			}
+
+			.show_info img {
+				width: 120px;
+				height: auto;
+			}
+
+			.show_info .intro {
+				font-size: 12px;
+				margin-top: 8px;
+			}
+		}
+
+		/* 触摸设备优化 */
+		@media (hover: none) and (pointer: coarse) {
+			.element:hover {
+				box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
+				border: 1px solid rgba(127, 255, 255, 0.25);
+			}
+
+			button:hover {
+				background-color: transparent;
+				transform: none;
+			}
+
+			button:active {
+				background-color: rgba(0, 255, 255, 0.5);
+				transform: scale(0.95);
+			}
 		}
 	</style>
 	<link rel="stylesheet" href="css/animate.min.css">
@@ -376,8 +512,10 @@
 
 		function init() {
 
+			var isMobile = window.innerWidth <= 768;
+			
 			camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000);
-			camera.position.z = 3000;
+			camera.position.z = isMobile ? 4500 : 3000;
 
 			scene = new THREE.Scene();
 
@@ -501,9 +639,9 @@
 
 			// 鼠标控制
 			controls = new THREE.TrackballControls(camera, renderer.domElement);
-			controls.rotateSpeed = 0.5;
-			controls.minDistance = 500;
-			controls.maxDistance = 6000;
+			controls.rotateSpeed = isMobile ? 1.5 : 0.5;
+			controls.minDistance = isMobile ? 1500 : 500;
+			controls.maxDistance = isMobile ? 8000 : 6000;
 			controls.addEventListener('change', render);
 
 			// 自动更换
@@ -585,6 +723,9 @@
 			camera.aspect = window.innerWidth / window.innerHeight;
 			camera.updateProjectionMatrix();
 
+			var isMobile = window.innerWidth <= 768;
+			camera.position.z = isMobile ? 4500 : 3000;
+
 			renderer.setSize(window.innerWidth, window.innerHeight);
 
 			render();
@@ -595,7 +736,8 @@
 
 			// 让场景通过x轴或者y轴旋转  & z
 			// scene.rotation.x += 0.011;
-			scene.rotation.y += 0.008;
+			var isMobile = window.innerWidth <= 768;
+			scene.rotation.y += isMobile ? 0.004 : 0.008;
 
 			requestAnimationFrame(animate);
 

@@ -1,6 +1,7 @@
 * {
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
 }
 
 html {
@@ -11,11 +12,31 @@ html {
     background-position: center;
 }
 
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 .title {
     color: rgb(0, 255, 255);
     text-align: center;
     text-shadow: /* 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135 */;
     font-size: 40px;
+    padding: 20px 10px;
+    animation: fadeInDown 1s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .cube {
@@ -28,6 +49,9 @@ html {
     transform: rotateX(-30deg) rotateY(-80deg);
     transform-style: preserve-3d;
     animation: rotate 15s infinite;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 .cube .outer-cube,
@@ -66,6 +90,9 @@ html {
 .outer-cube img {
     width: 200px;
     height: 200px;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
 
 
@@ -105,6 +132,9 @@ html {
 .inner-cube img {
     width: 130px;
     height: 130px;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .inner-top {
@@ -200,4 +230,420 @@ html {
     margin-top: 60px;
     color: white;
     font-size: 18px;
+}
+
+/* 平板端适配 */
+@media (max-width: 768px) {
+    .title {
+        font-size: 32px;
+        padding: 15px 10px;
+    }
+
+    .cube {
+        margin-top: 12%;
+        margin-left: 35%;
+        width: 160px;
+        height: 160px;
+    }
+
+    .outer-cube .outer-top,
+    .outer-cube .outer-bottom,
+    .outer-cube .outer-right,
+    .outer-cube .outer-left,
+    .outer-cube .outer-front,
+    .outer-cube .outer-back {
+        width: 160px;
+        height: 160px;
+    }
+
+    .outer-cube img {
+        width: 160px;
+        height: 160px;
+    }
+
+    .outer-top {
+        transform: rotateX(90deg) translateZ(80px);
+    }
+
+    .outer-bottom {
+        transform: rotateX(-90deg) translateZ(80px);
+    }
+
+    .outer-front {
+        transform: rotateY(0deg) translateZ(80px);
+    }
+
+    .outer-back {
+        transform: translateZ(-80px) rotateY(180deg);
+    }
+
+    .outer-left {
+        transform: rotateY(90deg) translateZ(80px);
+    }
+
+    .outer-right {
+        transform: rotateY(-90deg) translateZ(80px);
+    }
+
+    .inner-cube>div {
+        top: 25px;
+        left: 25px;
+        width: 110px;
+        height: 110px;
+    }
+
+    .inner-cube img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .inner-top {
+        transform: rotateX(90deg) translateZ(55px);
+    }
+
+    .inner-bottom {
+        transform: rotateX(-90deg) translateZ(55px);
+    }
+
+    .inner-front {
+        transform: rotateY(0deg) translateZ(55px);
+    }
+
+    .inner-back {
+        transform: translateZ(-55px) rotateY(180deg);
+    }
+
+    .inner-left {
+        transform: rotateY(90deg) translateZ(55px);
+    }
+
+    .inner-right {
+        transform: rotateY(-90deg) translateZ(55px);
+    }
+
+    .cube:hover .outer-top,
+    .cube:active .outer-top {
+        transform: rotateX(90deg) translateZ(160px);
+    }
+
+    .cube:hover .outer-bottom,
+    .cube:active .outer-bottom {
+        transform: rotateX(-90deg) translateZ(160px);
+    }
+
+    .cube:hover .outer-front,
+    .cube:active .outer-front {
+        transform: rotateY(0deg) translateZ(160px);
+    }
+
+    .cube:hover .outer-back,
+    .cube:active .outer-back {
+        transform: translateZ(-160px) rotateY(180deg);
+    }
+
+    .cube:hover .outer-left,
+    .cube:active .outer-left {
+        transform: rotateY(90deg) translateZ(160px);
+    }
+
+    .cube:hover .outer-right,
+    .cube:active .outer-right {
+        transform: rotateY(-90deg) translateZ(160px);
+    }
+
+    .message .author {
+        font-size: 28px;
+        right: 20px;
+    }
+
+    .message .tip {
+        margin-top: 50px;
+        font-size: 16px;
+        padding: 0 15px;
+    }
+}
+
+/* 手机端适配 */
+@media (max-width: 480px) {
+    .title {
+        font-size: 26px;
+        padding: 12px 8px;
+    }
+
+    .cube {
+        margin-top: 15%;
+        margin-left: 25%;
+        width: 120px;
+        height: 120px;
+        animation: rotate 20s infinite;
+    }
+
+    .outer-cube .outer-top,
+    .outer-cube .outer-bottom,
+    .outer-cube .outer-right,
+    .outer-cube .outer-left,
+    .outer-cube .outer-front,
+    .outer-cube .outer-back {
+        width: 120px;
+        height: 120px;
+        border-width: 1px;
+    }
+
+    .outer-cube img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .outer-top {
+        transform: rotateX(90deg) translateZ(60px);
+    }
+
+    .outer-bottom {
+        transform: rotateX(-90deg) translateZ(60px);
+    }
+
+    .outer-front {
+        transform: rotateY(0deg) translateZ(60px);
+    }
+
+    .outer-back {
+        transform: translateZ(-60px) rotateY(180deg);
+    }
+
+    .outer-left {
+        transform: rotateY(90deg) translateZ(60px);
+    }
+
+    .outer-right {
+        transform: rotateY(-90deg) translateZ(60px);
+    }
+
+    .inner-cube>div {
+        top: 20px;
+        left: 20px;
+        width: 80px;
+        height: 80px;
+    }
+
+    .inner-cube img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .inner-top {
+        transform: rotateX(90deg) translateZ(40px);
+    }
+
+    .inner-bottom {
+        transform: rotateX(-90deg) translateZ(40px);
+    }
+
+    .inner-front {
+        transform: rotateY(0deg) translateZ(40px);
+    }
+
+    .inner-back {
+        transform: translateZ(-40px) rotateY(180deg);
+    }
+
+    .inner-left {
+        transform: rotateY(90deg) translateZ(40px);
+    }
+
+    .inner-right {
+        transform: rotateY(-90deg) translateZ(40px);
+    }
+
+    .cube:hover .outer-top,
+    .cube:active .outer-top {
+        transform: rotateX(90deg) translateZ(120px);
+    }
+
+    .cube:hover .outer-bottom,
+    .cube:active .outer-bottom {
+        transform: rotateX(-90deg) translateZ(120px);
+    }
+
+    .cube:hover .outer-front,
+    .cube:active .outer-front {
+        transform: rotateY(0deg) translateZ(120px);
+    }
+
+    .cube:hover .outer-back,
+    .cube:active .outer-back {
+        transform: translateZ(-120px) rotateY(180deg);
+    }
+
+    .cube:hover .outer-left,
+    .cube:active .outer-left {
+        transform: rotateY(90deg) translateZ(120px);
+    }
+
+    .cube:hover .outer-right,
+    .cube:active .outer-right {
+        transform: rotateY(-90deg) translateZ(120px);
+    }
+
+    .message .author {
+        font-size: 22px;
+        right: 15px;
+    }
+
+    .message .tip {
+        margin-top: 40px;
+        font-size: 14px;
+        padding: 0 10px;
+        text-align: center;
+    }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    .cube:hover .outer-top,
+    .cube:hover .outer-bottom,
+    .cube:hover .outer-front,
+    .cube:hover .outer-back,
+    .cube:hover .outer-left,
+    .cube:hover .outer-right {
+        transform: none;
+        opacity: 0.3;
+    }
+
+    .cube:active .outer-top,
+    .cube:active .outer-bottom,
+    .cube:active .outer-front,
+    .cube:active .outer-back,
+    .cube:active .outer-left,
+    .cube:active .outer-right {
+        opacity: 0.8;
+    }
+}
+
+/* 小屏幕手机适配 */
+@media (max-width: 360px) {
+    .title {
+        font-size: 22px;
+        padding: 10px 5px;
+    }
+
+    .cube {
+        margin-left: 20%;
+        width: 100px;
+        height: 100px;
+    }
+
+    .outer-cube .outer-top,
+    .outer-cube .outer-bottom,
+    .outer-cube .outer-right,
+    .outer-cube .outer-left,
+    .outer-cube .outer-front,
+    .outer-cube .outer-back {
+        width: 100px;
+        height: 100px;
+    }
+
+    .outer-cube img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .outer-top {
+        transform: rotateX(90deg) translateZ(50px);
+    }
+
+    .outer-bottom {
+        transform: rotateX(-90deg) translateZ(50px);
+    }
+
+    .outer-front {
+        transform: rotateY(0deg) translateZ(50px);
+    }
+
+    .outer-back {
+        transform: translateZ(-50px) rotateY(180deg);
+    }
+
+    .outer-left {
+        transform: rotateY(90deg) translateZ(50px);
+    }
+
+    .outer-right {
+        transform: rotateY(-90deg) translateZ(50px);
+    }
+
+    .inner-cube>div {
+        top: 18px;
+        left: 18px;
+        width: 64px;
+        height: 64px;
+    }
+
+    .inner-cube img {
+        width: 64px;
+        height: 64px;
+    }
+
+    .inner-top {
+        transform: rotateX(90deg) translateZ(32px);
+    }
+
+    .inner-bottom {
+        transform: rotateX(-90deg) translateZ(32px);
+    }
+
+    .inner-front {
+        transform: rotateY(0deg) translateZ(32px);
+    }
+
+    .inner-back {
+        transform: translateZ(-32px) rotateY(180deg);
+    }
+
+    .inner-left {
+        transform: rotateY(90deg) translateZ(32px);
+    }
+
+    .inner-right {
+        transform: rotateY(-90deg) translateZ(32px);
+    }
+
+    .cube:hover .outer-top,
+    .cube:active .outer-top {
+        transform: rotateX(90deg) translateZ(100px);
+    }
+
+    .cube:hover .outer-bottom,
+    .cube:active .outer-bottom {
+        transform: rotateX(-90deg) translateZ(100px);
+    }
+
+    .cube:hover .outer-front,
+    .cube:active .outer-front {
+        transform: rotateY(0deg) translateZ(100px);
+    }
+
+    .cube:hover .outer-back,
+    .cube:active .outer-back {
+        transform: translateZ(-100px) rotateY(180deg);
+    }
+
+    .cube:hover .outer-left,
+    .cube:active .outer-left {
+        transform: rotateY(90deg) translateZ(100px);
+    }
+
+    .cube:hover .outer-right,
+    .cube:active .outer-right {
+        transform: rotateY(-90deg) translateZ(100px);
+    }
+
+    .message .author {
+        font-size: 18px;
+        right: 10px;
+    }
+
+    .message .tip {
+        font-size: 13px;
+        padding: 0 8px;
+    }
 }
