@@ -21,6 +21,9 @@
         body {
             font-family: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ffe6fa 100%);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -28,7 +31,7 @@
             padding: 20px;
             position: relative;
             overflow: hidden;
-            gap: 30px;
+            transition: background-image 2s ease-in-out;
         }
 
         /* 漂浮的小图案 */
@@ -38,6 +41,7 @@
             opacity: 0.6;
             animation: float 6s ease-in-out infinite;
             pointer-events: none;
+            z-index: 1;
         }
 
         @keyframes float {
@@ -52,23 +56,34 @@
         .emoji-5 { top: 40%; left: 5%; animation-delay: 4s; font-size: 1.5rem; }
 
         .container {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
             border-radius: 30px;
             padding: 40px 30px;
             max-width: 400px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             position: relative;
-            z-index: 10;
+            z-index: 15;
             animation: fadeInLeft 0.8s ease-out;
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             max-height: 85vh;
             overflow-y: auto;
             /* 隐藏滚动条 */
             scrollbar-width: none;
             -ms-overflow-style: none;
+        }
+
+        /* 主容器包裹层 */
+        .main-wrapper {
+            display: flex;
+            gap: 200px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+            z-index: 10;
         }
 
         .container::-webkit-scrollbar {
@@ -109,8 +124,50 @@
         }
 
         /* 空状态提示 */
+        .subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 25px;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Ma Shan Zheng', cursive;
+            letter-spacing: 2px;
+            animation: subtitleShimmer 3s ease-in-out infinite;
+            text-shadow: none;
+            border-radius: 15px;
+            position: relative;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        /* 副标题毛玻璃背景 */
+        .subtitle-wrapper {
+            display: inline-block;
+            position: relative;
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(216, 27, 96, 0.1);
+        }
+
+        @keyframes subtitleShimmer {
+            0%, 100% {
+                filter: brightness(1) drop-shadow(0 0 5px rgba(216, 27, 96, 0.4));
+            }
+            50% {
+                filter: brightness(1.2) drop-shadow(0 0 15px rgba(216, 27, 96, 0.7));
+            }
+        }
+
         .empty-tip {
-            color: #999;
+            color: #888;
             font-size: 0.9rem;
             padding: 20px;
             display: none;
@@ -125,6 +182,22 @@
             z-index: 5;
             text-align: center;
             animation: fadeInScale 1s ease-out;
+            pointer-events: none;
+        }
+
+        #titleCanvas {
+            pointer-events: auto;
+        }
+
+        /* 扩大交互区域覆盖整个页面 */
+        .interaction-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 20;
         }
 
         @keyframes fadeInScale {
@@ -254,7 +327,7 @@
 
         .refresh-link {
             font-size: 0.85rem;
-            color: #bbb;
+            color: #fff;
             margin-top: 20px;
             text-decoration: none;
             cursor: pointer;
@@ -262,10 +335,11 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .refresh-link:hover {
-            color: #ff6b9d;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .refresh-link span {
@@ -327,8 +401,50 @@
         }
 
         /* 空状态提示 */
+        .subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 25px;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Ma Shan Zheng', cursive;
+            letter-spacing: 2px;
+            animation: subtitleShimmer 3s ease-in-out infinite;
+            text-shadow: none;
+            border-radius: 15px;
+            position: relative;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        /* 副标题毛玻璃背景 */
+        .subtitle-wrapper {
+            display: inline-block;
+            position: relative;
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(255, 107, 157, 0.2);
+        }
+
+        @keyframes subtitleShimmer {
+            0%, 100% {
+                filter: brightness(1) drop-shadow(0 0 5px rgba(216, 27, 96, 0.4));
+            }
+            50% {
+                filter: brightness(1.2) drop-shadow(0 0 15px rgba(216, 27, 96, 0.7));
+            }
+        }
+
         .empty-tip {
-            color: #999;
+            color: #888;
             font-size: 0.9rem;
             padding: 20px;
             display: none;
@@ -336,27 +452,35 @@
 
         /* 右侧信息面板 */
         .info-panel {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(15px);
+             background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(3px);
             border-radius: 30px;
-            padding: 50px 40px;
-            max-width: 350px;
+            padding: 30px;
+            max-width: 420px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             position: relative;
-            z-index: 10;
+            z-index: 15;
             animation: fadeInRight 0.8s ease-out;
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: 30px;
+            gap: 20px;
             max-height: 85vh;
             overflow-y: auto;
             /* 隐藏滚动条 */
             scrollbar-width: none;
             -ms-overflow-style: none;
+        }
+
+        .info-top {
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .info-bottom {
+            padding: 20px 15px;
         }
 
         .info-panel::-webkit-scrollbar {
@@ -377,8 +501,8 @@
         .time-display {
             font-size: 3.5rem;
             font-weight: 700;
-            color: #ff6b9d;
-            text-shadow: 2px 2px 0 rgba(255, 182, 193, 0.3);
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             margin: 10px 0;
             font-family: 'Noto Serif SC', serif;
             letter-spacing: 3px;
@@ -386,9 +510,10 @@
 
         .date-display {
             font-size: 1.3rem;
-            color: #666;
+            color: #fff;
             margin-bottom: 15px;
             font-family: 'ZCOOL XiaoWei', serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .location-section {
@@ -398,26 +523,26 @@
 
         .location-text {
             font-size: 1.8rem;
-            color: #ff6b9d;
+            color: #fff;
             font-weight: 600;
             font-family: 'Ma Shan Zheng', cursive;
             letter-spacing: 3px;
             position: relative;
             display: inline-block;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ff6b9d 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: textShimmer 3s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(255, 107, 157, 0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         @keyframes textShimmer {
             0%, 100% {
-                filter: brightness(1) drop-shadow(0 0 5px rgba(255, 107, 157, 0.3));
+                filter: brightness(1) drop-shadow(0 0 5px rgba(233, 30, 99, 0.3));
             }
             50% {
-                filter: brightness(1.3) drop-shadow(0 0 15px rgba(255, 107, 157, 0.6));
+                filter: brightness(1.3) drop-shadow(0 0 15px rgba(233, 30, 99, 0.6));
             }
         }
 
@@ -425,11 +550,98 @@
             display: none;
         }
 
+        .intro-section {
+            text-align: left;
+        }
+
+        .intro-title {
+            font-size: 1.3rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-family: 'Ma Shan Zheng', cursive;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .intro-content {
+            font-size: 1rem;
+            color: #fff;
+            line-height: 1.8;
+            font-family: 'ZCOOL XiaoWei', serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro-content p {
+            margin-bottom: 12px;
+        }
+
+        /* 哲理台词切换区域 */
+        .quotes-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: transparent;
+            border-radius: 15px;
+        }
+
+        .quote-item {
+            padding: 20px;
+             background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-size: 1.2rem;
+            color: #fff;
+            line-height: 1.8;
+            font-family: 'ZCOOL XiaoWei', serif;
+            border-left: 4px solid rgba(255, 255, 255, 0.6);
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: justify;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .quote-item.fade-out {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .quote-item.fade-in {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .quote-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quote-item .quote-text {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .quote-item .quote-text {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .quote-item .quote-source {
+            font-size: 1rem;
+            color: #fff;
+            text-align: right;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
         /* 响应式设计 */
         @media (max-width: 1200px) {
             body {
                 flex-direction: column;
-                gap: 20px;
+                gap: 30px;
+                align-items: flex-start;
+                padding-top: 30px;
+                padding-bottom: 30px;
             }
 
             .title-container {
@@ -461,42 +673,88 @@
             .info-panel {
                 max-width: 600px;
                 order: 1;
-                padding: 30px 40px;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: space-around;
-                gap: 20px;
+                padding: 20px 30px;
+            }
+
+            .info-top, .info-bottom {
+                padding: 15px;
             }
 
             .time-display {
                 font-size: 2.5rem;
-                margin: 0;
+                margin: 10px 0;
             }
 
             .date-display {
                 font-size: 1rem;
-                margin: 0;
+                margin: 5px 0;
             }
 
-            .location-display {
-                width: 100%;
-                margin-top: 10px;
+            .location-text {
+                font-size: 1.5rem;
+            }
+
+            .intro-title {
+                font-size: 1.2rem;
+            }
+
+            .intro-content {
+                font-size: 0.95rem;
+            }
+
+            .quotes-section {
+                padding: 12px;
+                margin-top: 15px;
+            }
+
+            .quote-item {
+                padding: 16px;
+                font-size: 1.1rem;
+                min-height: 90px;
+            }
+
+            .quote-item .quote-source {
+                font-size: 0.95rem;
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+                gap: 25px;
+            }
+
             .container {
-                padding: 30px 20px;
+                padding: 30px 25px;
+                max-width: 500px;
             }
 
             .info-panel {
-                padding: 20px;
-                flex-direction: column;
-                gap: 15px;
+                padding: 25px 20px;
+                max-width: 500px;
+            }
+
+            .info-top, .info-bottom {
+                padding: 12px;
+            }
+
+            .logo {
+                width: 130px;
+                height: 130px;
+            }
+
+            .subtitle {
+                font-size: 1.3rem;
+                padding: 12px 20px;
+            }
+
+            .card-image {
+                width: 70px;
+                height: 70px;
             }
 
             .time-display {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .date-display {
@@ -507,9 +765,196 @@
                 font-size: 1.4rem;
             }
 
+            .intro-title {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+
+            .intro-content {
+                font-size: 0.9rem;
+                line-height: 1.7;
+            }
+
+            .quotes-section {
+                padding: 10px;
+                margin-top: 12px;
+            }
+
+            .quote-item {
+                padding: 14px;
+                font-size: 1rem;
+                min-height: 85px;
+            }
+
+            .quote-item .quote-source {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 10px;
+                gap: 20px;
+            }
+
+            .container {
+                padding: 25px 18px;
+                max-width: 100%;
+            }
+
+            .info-panel {
+                padding: 18px 15px;
+                max-width: 100%;
+                gap: 15px;
+            }
+
+            .info-top, .info-bottom {
+                padding: 10px;
+            }
+
+            .logo {
+                width: 110px;
+                height: 110px;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+                padding: 10px 18px;
+                margin-bottom: 20px;
+            }
+
+            .card-image {
+                width: 65px;
+                height: 65px;
+            }
+
+            .card-images {
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .links {
+                gap: 14px;
+                max-height: 300px;
+                padding-right: 8px;
+            }
+
             .link-item {
                 padding: 12px 20px;
                 font-size: 0.95rem;
+            }
+
+            .time-display {
+                font-size: 1.8rem;
+                margin: 8px 0;
+            }
+
+            .date-display {
+                font-size: 0.85rem;
+                margin-bottom: 12px;
+            }
+
+            .location-text {
+                font-size: 1.2rem;
+            }
+
+            .intro-title {
+                font-size: 1.05rem;
+                margin-bottom: 10px;
+            }
+
+            .intro-content {
+                font-size: 0.85rem;
+                line-height: 1.6;
+            }
+
+            .intro-content p {
+                margin-bottom: 10px;
+            }
+
+            .refresh-link {
+                font-size: 0.8rem;
+                margin-top: 15px;
+            }
+
+            .floating-emoji {
+                font-size: 1.5rem;
+            }
+
+            .quotes-section {
+                padding: 8px;
+                margin-top: 10px;
+            }
+
+            .quote-item {
+                padding: 12px;
+                font-size: 0.95rem;
+                min-height: 80px;
+            }
+
+            .quote-item .quote-source {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            body {
+                padding: 12px 8px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .info-panel {
+                padding: 15px 12px;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+                padding: 8px 15px;
+            }
+
+            .card-image {
+                width: 55px;
+                height: 55px;
+            }
+
+            .time-display {
+                font-size: 1.5rem;
+            }
+
+            .date-display {
+                font-size: 0.8rem;
+            }
+
+            .location-text {
+                font-size: 1.1rem;
+            }
+
+            .link-item {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+
+            .quotes-section {
+                padding: 6px;
+                margin-top: 8px;
+            }
+
+            .quote-item {
+                padding: 10px;
+                font-size: 0.9rem;
+                min-height: 75px;
+            }
+
+            .quote-item .quote-source {
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -528,41 +973,43 @@
     <div class="star star-3">⭐</div>
     <div class="star star-4">⭐</div>
 
-    <!-- 左侧容器 -->
-    <div class="container">
-        <img src="images/1.jpg" alt="Logo" class="logo" id="mainLogo">
+    <div class="main-wrapper">
+        <!-- 左侧容器 -->
+        <div class="container">
+            <img src="images/1.jpg" alt="Logo" class="logo" id="mainLogo">
 
-        <p class="subtitle">✨ 欢迎来到小皮皮虾的小天地 ✨</p>
+            <p class="subtitle">欢迎来到小皮皮虾的小天地</p>
 
-        <!-- 装饰图片 -->
-        <div class="card-images">
-            <img src="images/2.jpg" alt="图片1" class="card-image">
-            <img src="images/3.jpg" alt="图片2" class="card-image">
-            <img src="images/4.jpg" alt="图片3" class="card-image">
+            <!-- 按钮容器（动态生成） -->
+            <div class="links"></div>
+            <p class="empty-tip">暂无项目按钮</p>
+
+            <p class="refresh-link" onclick="clearCache()">
+                <span>🔄</span>
+                <span>清除缓存</span>
+            </p>
         </div>
 
-        <!-- 按钮容器（动态生成） -->
-        <div class="links"></div>
-        <p class="empty-tip">暂无项目按钮</p>
+        <!-- 中间大标题 -->
+        <div class="title-container">
+            <canvas id="titleCanvas"></canvas>
+        </div>
 
-        <p class="refresh-link" onclick="clearCache()">
-            <span>🔄</span>
-            <span>清除缓存</span>
-        </p>
-    </div>
-
-    <!-- 中间大标题 -->
-    <div class="title-container">
-        <canvas id="titleCanvas"></canvas>
-    </div>
-
-    <!-- 右侧信息面板 -->
-    <div class="info-panel">
-        <div class="time-display" id="timeDisplay">00:00:00</div>
-        <div class="date-display" id="dateDisplay">2025年1月1日 星期一</div>
-        <div class="location-section">
-            <div class="location-decoration"></div>
-            <div class="location-text">上海市徐汇区</div>
+        <!-- 右侧信息面板 -->
+        <div class="info-panel">
+            <div class="info-top">
+                <div class="time-display" id="timeDisplay">00:00:00</div>
+                <div class="date-display" id="dateDisplay">2025年1月1日 星期一</div>
+                <div class="location-section">
+                    <div class="location-decoration"></div>
+                    <div class="location-text">上海市徐汇区</div>
+                </div>
+            </div>
+            <div class="info-bottom">
+                <div class="quotes-section">
+                    <div class="quote-item" id="quoteDisplay"></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -574,7 +1021,7 @@
                 if (!this.canvas) return;
                 this.ctx = this.canvas.getContext('2d');
                 this.text = text;
-                this.fontSize = fontSize || 100;
+                this.fontSize = fontSize || 150;
                 this.particles = [];
                 this.mouseX = 0;
                 this.mouseY = 0;
@@ -583,6 +1030,7 @@
 
                 this.init();
                 this.bindEvents();
+                this.bindGlobalMouseEvents();
             }
 
             init() {
@@ -610,8 +1058,8 @@
                 tempCanvas.height = this.canvas.height / scale;
 
                 const fontSize = Math.min(this.fontSize, tempCanvas.width / this.text.length * 2.5);
-                tempCtx.font = `bold ${fontSize}px "Ma Shan Zheng", cursive`;
-                tempCtx.fillStyle = '#ff6b9d';
+                tempCtx.font = `${fontSize}px "Ma Shan Zheng", cursive`;
+                tempCtx.fillStyle = '#ffffff';
                 tempCtx.textAlign = 'center';
                 tempCtx.textBaseline = 'middle';
                 tempCtx.fillText(this.text, tempCanvas.width / 2, tempCanvas.height / 2);
@@ -620,7 +1068,7 @@
                 const pixels = imageData.data;
 
                 this.particles = [];
-                const gap = 1.5 * scale;
+                const gap = 1.1 * scale;
 
                 for (let y = 0; y < tempCanvas.height; y += gap / scale) {
                     for (let x = 0; x < tempCanvas.width; x += gap / scale) {
@@ -633,8 +1081,8 @@
                                 y: y,
                                 originX: x,
                                 originY: y,
-                                color: `rgba(${255}, ${107}, ${157}, ${Math.random() * 0.3 + 0.7})`,
-                                size: Math.random() * 2.5 + 1.5,
+                                color: `rgba(${255}, ${255}, ${255}, ${Math.random() * 0.3 + 0.7})`,
+                                size: Math.random() * 1.2 + 0.8,
                                 vx: 0,
                                 vy: 0,
                                 angle: Math.random() * Math.PI * 2,
@@ -664,6 +1112,15 @@
                 window.addEventListener('resize', () => {
                     this.resize();
                     this.createParticles();
+                });
+            }
+
+            bindGlobalMouseEvents() {
+                document.addEventListener('mousemove', (e) => {
+                    const rect = this.canvas.getBoundingClientRect();
+                    this.mouseX = e.clientX - rect.left;
+                    this.mouseY = e.clientY - rect.top;
+                    this.isHovering = true;
                 });
             }
 
@@ -723,10 +1180,10 @@
         // 初始化大标题
         let titleParticleText;
         window.addEventListener('load', () => {
-            titleParticleText = new ParticleText('titleCanvas', '小皮皮虾', 100);
+            titleParticleText = new ParticleText('titleCanvas', '小皮皮虾', 160);
 
-            // 每5秒切换文字动画效果
-            const texts = ['小皮皮虾', '✨ 欢迎 ✨', '❤️ 你好 ❤️'];
+            // 每10秒切换文字动画效果
+            const texts = ['小皮皮虾'];
             let currentIndex = 0;
 
             setInterval(() => {
@@ -734,7 +1191,13 @@
                 if (titleParticleText) {
                     titleParticleText.changeText(texts[currentIndex]);
                 }
-            }, 5000);
+            }, 10000);
+
+            // 初始化语录的visible状态
+            const quoteDisplay = document.getElementById('quoteDisplay');
+            if (quoteDisplay) {
+                quoteDisplay.classList.add('visible');
+            }
         });
         // 动态生成按钮的配置
         //const buttonConfig = [
@@ -806,6 +1269,36 @@
             }
         }
 
+        // 背景图片轮换
+        const backgroundImages = [
+            'images/bg1.jpg',
+            'images/bg2.jpg',
+            'images/bg3.jpg',
+            'images/bg4.jpg',
+        ];
+        let currentBgIndex = 0;
+
+        function changeBackground() {
+            currentBgIndex = (currentBgIndex + 1) % backgroundImages.length;
+            const bgImage = new Image();
+            bgImage.src = backgroundImages[currentBgIndex];
+            bgImage.onload = () => {
+                document.body.style.backgroundImage = `url('${backgroundImages[currentBgIndex]}')`;
+            };
+        }
+
+        // 每30秒切换背景
+        setInterval(changeBackground, 30000);
+
+        // 初始化背景
+        window.addEventListener('load', () => {
+            const bgImage = new Image();
+            bgImage.src = backgroundImages[0];
+            bgImage.onload = () => {
+                document.body.style.backgroundImage = `url('${backgroundImages[0]}')`;
+            };
+        });
+
         // 添加更多随机漂浮的emoji
         function createFloatingEmoji() {
             const emojis = ['🌸', '💫', '✨', '🎀', '💕', '⭐', '🌈', '💝', '🎵', '🦋'];
@@ -837,7 +1330,7 @@
                     logo.src = logoImages[currentIndex];
                     logo.style.opacity = '1';
                 }, 300);
-            }, 5000);
+            }, 10000);
         }
 
         // 启动logo轮换
@@ -870,6 +1363,79 @@
         // 每秒更新时间
         setInterval(updateTime, 1000);
         updateTime();
+
+        // 游戏哲理语录
+        const gameQuotes = [
+            { text: "只要还活着，就有希望。", source: "《合金装备》Snake" },
+            { text: "人之所以会感到孤独，是因为人害怕失去。", source: "《最终幻想》" },
+            { text: "即使世界充满黑暗，也要在黑暗中寻找光明。", source: "《黑暗之魂》" },
+            { text: "英雄不是生来就强大，而是在绝境中选择了勇敢。", source: "《刺客信条》" },
+            { text: "过去无法改变，但未来掌握在自己手中。", source: "《命运石之门》" },
+            { text: "真正的力量不是为了征服，而是为了守护。", source: "《火焰纹章》" },
+            { text: "即使前路充满荆棘，也要勇往直前。", source: "《怪物猎人》" },
+            { text: "每一段旅程都有终点，重要的是沿途的风景。", source: "《最终幻想15》" },
+            { text: "勇气不是不害怕，而是害怕依然前行。", source: "《生化危机》" },
+            { text: "信任是建立在行动之上的，而不是言语。", source: "《合金装备》" },
+            { text: "每个人都有属于自己的战场，重要的是如何面对。", source: "《鬼泣》" },
+            { text: "失去的东西不会回来，但我们会变得更强大。", source: "《暗黑破坏神》" },
+            { text: "命运可以被改写，只要我们有这个勇气。", source: "《女神异闻录》" },
+            { text: "真正的敌人不是别人，而是自己的软弱。", source: "《怪物猎人》" },
+            { text: "没有什么是永恒的，但记忆会永远存在。", source: "《最终幻想》" },
+            { text: "即使世界毁灭，也要守护自己珍视的东西。", source: "《尼尔：机械纪元》" },
+            { text: "真正的自由不是随心所欲，而是内心的平静。", source: "《刺客信条》" },
+            { text: "每个人都有自己的故事，不要轻易评判他人。", source: "《巫师3》" },
+            { text: "逆境中的坚持，才是真正的勇气。", source: "《黑暗之魂》" },
+            { text: "爱是最强大的力量，它能够超越一切界限。", source: "《最终幻想》" },
+            { text: "时间会流逝，但记忆永远珍贵。", source: "《合金装备》" },
+            { text: "每个选择都有代价，重要的是不后悔。", source: "《质量效应》" },
+            { text: "真正的和平不是没有战争，而是学会理解与包容。", source: "《合金装备》" },
+            { text: "英雄也会迷茫，但依然选择前行。", source: "《战神》" },
+            { text: "生命中最珍贵的，往往是那些平凡的时刻。", source: "《最终幻想10》" }
+        ];
+
+        let currentQuoteIndex = 0;
+
+        // 显示当前语录
+        function showQuote(index) {
+            const quoteDisplay = document.getElementById('quoteDisplay');
+            const quote = gameQuotes[index];
+
+            // 添加淡出效果
+            quoteDisplay.classList.add('fade-out');
+            quoteDisplay.classList.remove('visible');
+
+            setTimeout(() => {
+                // 在逗号处换行
+                const formattedText = quote.text.replace(/，/g, '，\n');
+                quoteDisplay.innerHTML = `
+                    <div class="quote-text">"${formattedText}"</div>
+                    <div class="quote-source">— ${quote.source}</div>
+                `;
+
+                // 移除淡出，添加淡入
+                quoteDisplay.classList.remove('fade-out');
+                quoteDisplay.classList.add('fade-in');
+
+                // 短暂延迟后添加visible类以触发淡入动画
+                requestAnimationFrame(() => {
+                    quoteDisplay.classList.remove('fade-in');
+                    quoteDisplay.classList.add('visible');
+                });
+            }, 500);
+        }
+
+        // 切换到下一句语录
+        function nextQuote() {
+            currentQuoteIndex = (currentQuoteIndex + 1) % gameQuotes.length;
+            showQuote(currentQuoteIndex);
+        }
+
+        // 页面加载完成后显示第一句语录
+        window.addEventListener('load', () => {
+            showQuote(currentQuoteIndex);
+            // 每10秒自动切换
+            setInterval(nextQuote, 10000);
+        });
     </script>
 </body>
 </html>
