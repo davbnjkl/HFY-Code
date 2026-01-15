@@ -638,10 +638,16 @@
         @media (max-width: 1200px) {
             body {
                 flex-direction: column;
-                gap: 30px;
-                align-items: flex-start;
-                padding-top: 30px;
-                padding-bottom: 30px;
+                gap: 25px;
+                align-items: center;
+                padding: 25px 20px;
+            }
+
+            .main-wrapper {
+                flex-direction: column;
+                gap: 25px;
+                align-items: center;
+                width: 100%;
             }
 
             .title-container {
@@ -650,8 +656,8 @@
                 left: auto;
                 transform: none;
                 width: 100%;
-                max-width: 600px;
-                margin-bottom: 20px;
+                max-width: 500px;
+                margin-bottom: 10px;
             }
 
             @keyframes fadeInScale {
@@ -666,14 +672,15 @@
             }
 
             .container {
-                max-width: 600px;
-                order: 2;
+                max-width: 100%;
+                order: 1;
+                padding: 30px 25px;
             }
 
             .info-panel {
-                max-width: 600px;
-                order: 1;
-                padding: 20px 30px;
+                max-width: 100%;
+                order: 2;
+                padding: 25px 20px;
             }
 
             .info-top, .info-bottom {
@@ -681,17 +688,17 @@
             }
 
             .time-display {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
                 margin: 10px 0;
             }
 
             .date-display {
-                font-size: 1rem;
+                font-size: 1.1rem;
                 margin: 5px 0;
             }
 
             .location-text {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
 
             .intro-title {
@@ -699,7 +706,7 @@
             }
 
             .intro-content {
-                font-size: 0.95rem;
+                font-size: 1rem;
             }
 
             .quotes-section {
@@ -720,18 +727,20 @@
 
         @media (max-width: 768px) {
             body {
-                padding: 20px 15px;
-                gap: 25px;
+                padding: 15px;
+                gap: 20px;
             }
 
             .container {
-                padding: 30px 25px;
-                max-width: 500px;
+                padding: 25px 20px;
+                max-width: 100%;
+                order: 1;
             }
 
             .info-panel {
-                padding: 25px 20px;
-                max-width: 500px;
+                padding: 20px 15px;
+                max-width: 100%;
+                order: 2;
             }
 
             .info-top, .info-bottom {
@@ -739,18 +748,20 @@
             }
 
             .logo {
-                width: 130px;
-                height: 130px;
+                width: 120px;
+                height: 120px;
             }
 
             .subtitle {
                 font-size: 1.3rem;
                 padding: 12px 20px;
+                white-space: normal;
+                line-height: 1.4;
             }
 
             .card-image {
-                width: 70px;
-                height: 70px;
+                width: 65px;
+                height: 65px;
             }
 
             .time-display {
@@ -762,7 +773,8 @@
             }
 
             .location-text {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
+                line-height: 1.4;
             }
 
             .intro-title {
@@ -784,6 +796,7 @@
                 padding: 14px;
                 font-size: 1rem;
                 min-height: 85px;
+                line-height: 1.6;
             }
 
             .quote-item .quote-source {
@@ -793,69 +806,73 @@
 
         @media (max-width: 480px) {
             body {
-                padding: 15px 10px;
-                gap: 20px;
-            }
-
-            .container {
-                padding: 25px 18px;
-                max-width: 100%;
-            }
-
-            .info-panel {
-                padding: 18px 15px;
-                max-width: 100%;
+                padding: 10px;
                 gap: 15px;
             }
 
+            .container {
+                padding: 20px 15px;
+                max-width: 100%;
+                min-height: auto;
+            }
+
+            .info-panel {
+                padding: 15px 12px;
+                max-width: 100%;
+                gap: 12px;
+            }
+
             .info-top, .info-bottom {
-                padding: 10px;
+                padding: 8px;
             }
 
             .logo {
-                width: 110px;
-                height: 110px;
+                width: 100px;
+                height: 100px;
             }
 
             .subtitle {
-                font-size: 1.2rem;
-                padding: 10px 18px;
-                margin-bottom: 20px;
+                font-size: 1.1rem;
+                padding: 10px 15px;
+                margin-bottom: 15px;
+                white-space: normal;
+                line-height: 1.4;
             }
 
             .card-image {
-                width: 65px;
-                height: 65px;
+                width: 60px;
+                height: 60px;
             }
 
             .card-images {
-                gap: 10px;
-                margin-bottom: 20px;
+                gap: 8px;
+                margin-bottom: 15px;
             }
 
             .links {
-                gap: 14px;
-                max-height: 300px;
-                padding-right: 8px;
+                gap: 12px;
+                max-height: none;
+                padding-right: 0;
             }
 
             .link-item {
-                padding: 12px 20px;
+                padding: 12px 18px;
                 font-size: 0.95rem;
             }
 
             .time-display {
-                font-size: 1.8rem;
+                font-size: 2rem;
                 margin: 8px 0;
             }
 
             .date-display {
                 font-size: 0.85rem;
-                margin-bottom: 12px;
+                margin-bottom: 10px;
             }
 
             .location-text {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
+                line-height: 1.4;
             }
 
             .intro-title {
@@ -864,7 +881,7 @@
             }
 
             .intro-content {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
                 line-height: 1.6;
             }
 
@@ -874,11 +891,15 @@
 
             .refresh-link {
                 font-size: 0.8rem;
-                margin-top: 15px;
+                margin-top: 12px;
             }
 
             .floating-emoji {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
+            }
+
+            .star {
+                font-size: 0.9rem;
             }
 
             .quotes-section {
@@ -888,12 +909,14 @@
 
             .quote-item {
                 padding: 12px;
-                font-size: 0.95rem;
+                font-size: 0.9rem;
                 min-height: 80px;
+                line-height: 1.6;
             }
 
             .quote-item .quote-source {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
+                margin-top: 8px;
             }
         }
 
@@ -1432,6 +1455,8 @@
 
         // 页面加载完成后显示第一句语录
         window.addEventListener('load', () => {
+            // 随机选择初始语录
+            currentQuoteIndex = Math.floor(Math.random() * gameQuotes.length);
             showQuote(currentQuoteIndex);
             // 每10秒自动切换
             setInterval(nextQuote, 10000);
