@@ -325,30 +325,39 @@
             flex-shrink: 0;
         }
 
-        .refresh-link {
-            font-size: 0.85rem;
-            color: #fff;
+        .links-container {
+            display: flex;
+            gap: 15px;
             margin-top: 20px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: color 0.3s;
-            display: inline-flex;
+            justify-content: center;
+        }
+
+        .external-link {
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 5px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
-        .refresh-link:hover {
-            color: rgba(255, 255, 255, 0.7);
+        .external-link:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
         }
 
-        .refresh-link span {
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .external-link .link-icon {
+            font-size: 1.2rem;
         }
 
         /* 装饰性星星 */
@@ -527,23 +536,7 @@
             font-weight: 600;
             font-family: 'Ma Shan Zheng', cursive;
             letter-spacing: 3px;
-            position: relative;
-            display: inline-block;
-            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textShimmer 3s ease-in-out infinite;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes textShimmer {
-            0%, 100% {
-                filter: brightness(1) drop-shadow(0 0 5px rgba(233, 30, 99, 0.3));
-            }
-            50% {
-                filter: brightness(1.3) drop-shadow(0 0 15px rgba(233, 30, 99, 0.6));
-            }
         }
 
         .location-decoration {
@@ -632,6 +625,40 @@
             text-align: right;
             font-weight: 600;
             opacity: 0.9;
+        }
+
+        /* 欢迎信息样式 */
+        .welcome-message {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-size: 1.2rem;
+            color: #fff;
+            line-height: 1.8;
+            font-family: 'ZCOOL XiaoWei', serif;
+            border-left: 4px solid rgba(255, 255, 255, 0.6);
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .welcome-message.fade-out {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .welcome-message.fade-in {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .welcome-message.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* 响应式设计 */
@@ -723,6 +750,12 @@
             .quote-item .quote-source {
                 font-size: 0.95rem;
             }
+
+            .welcome-message {
+                padding: 16px;
+                font-size: 1.1rem;
+                min-height: 90px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -801,6 +834,13 @@
 
             .quote-item .quote-source {
                 font-size: 0.9rem;
+            }
+
+            .welcome-message {
+                padding: 14px;
+                font-size: 1rem;
+                min-height: 85px;
+                line-height: 1.6;
             }
         }
 
@@ -889,9 +929,17 @@
                 margin-bottom: 10px;
             }
 
-            .refresh-link {
+            .links-container {
+                gap: 10px;
+            }
+
+            .external-link {
+                padding: 8px 14px;
                 font-size: 0.8rem;
-                margin-top: 12px;
+            }
+
+            .external-link .link-icon {
+                font-size: 1rem;
             }
 
             .floating-emoji {
@@ -917,6 +965,13 @@
             .quote-item .quote-source {
                 font-size: 0.8rem;
                 margin-top: 8px;
+            }
+
+            .welcome-message {
+                padding: 12px;
+                font-size: 0.9rem;
+                min-height: 80px;
+                line-height: 1.6;
             }
         }
 
@@ -979,6 +1034,12 @@
             .quote-item .quote-source {
                 font-size: 0.8rem;
             }
+
+            .welcome-message {
+                padding: 10px;
+                font-size: 0.9rem;
+                min-height: 75px;
+            }
         }
     </style>
 </head>
@@ -1001,16 +1062,27 @@
         <div class="container">
             <img src="images/1.jpg" alt="Logo" class="logo" id="mainLogo">
 
-            <p class="subtitle">欢迎来到小皮皮虾的小天地</p>
+            <p class="subtitle" id="subtitleText">欢迎来到小皮皮虾的小天地</p>
 
             <!-- 按钮容器（动态生成） -->
             <div class="links"></div>
             <p class="empty-tip">暂无项目按钮</p>
 
-            <p class="refresh-link" onclick="clearCache()">
-                <span>🔄</span>
-                <span>清除缓存</span>
-            </p>
+            <!-- 外部链接按钮 -->
+            <div class="links-container">
+                <a href="https://github.com" target="_blank" class="external-link">
+                    <span class="link-icon">🐙</span>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://www.bilibili.com" target="_blank" class="external-link">
+                    <span class="link-icon">📺</span>
+                    <span>Bilibili</span>
+                </a>
+                <a href="https://www.baidu.com" target="_blank" class="external-link">
+                    <span class="link-icon">🔍</span>
+                    <span>Baidu</span>
+                </a>
+            </div>
         </div>
 
         <!-- 中间大标题 -->
@@ -1223,15 +1295,13 @@
             }
         });
         // 动态生成按钮的配置
-        //const buttonConfig = [
-           //{ href: 'Web/005/refresh.html', icon: '💝', text: '原水小子' },
-           //{ href: 'Web/007', icon: '🌈', text: 'jx宝宝' },
-            //{ href: 'Web/008', icon: '🎈', text: 'gjy宝宝' },
-           
-            
-       //];
- // 添加新按钮时，在这里按格式添加即可
- // { href: '新链接', icon: '🎁', text: '新项目' },
+        const buttonConfig = [
+            // { href: 'Web/005/refresh.html', icon: '💝', text: '原水小子' },
+            // { href: 'Web/007', icon: '🌈', text: 'jx宝宝' },
+            // { href: 'Web/008', icon: '🎈', text: 'gjy宝宝' },
+        ];
+        // 添加新按钮时，在这里按格式添加即可
+        // { href: '新链接', icon: '🎁', text: '新项目' },
         // 动态生成按钮
         function generateButtons() {
             const linksContainer = document.querySelector('.links');
@@ -1274,23 +1344,7 @@
             }
         })();
 
-        // 手动清除缓存函数
-        function clearCache() {
-            localStorage.clear();
-            sessionStorage.clear();
 
-            if ('caches' in window) {
-                caches.keys().then(function(names) {
-                    return Promise.all(names.map(name => caches.delete(name)));
-                }).then(() => {
-                    alert('✨ 缓存已清除！ ✨');
-                    location.reload(true);
-                });
-            } else {
-                alert('✨ 缓存已清除！ ✨');
-                location.reload(true);
-            }
-        }
 
         // 背景图片轮换
         const backgroundImages = [
@@ -1387,6 +1441,33 @@
         setInterval(updateTime, 1000);
         updateTime();
 
+        // 左侧欢迎语切换
+        const subtitleMessages = [
+            "欢迎来到小皮皮虾的小天地",
+            "个人主页正在建设中ing"
+        ];
+        let currentSubtitleIndex = 0;
+        const subtitleMessage = document.getElementById('subtitleText');
+
+        // 切换到下一条欢迎语
+        function nextSubtitleMessage() {
+            currentSubtitleIndex = (currentSubtitleIndex + 1) % subtitleMessages.length;
+            subtitleMessage.textContent = subtitleMessages[currentSubtitleIndex];
+        }
+
+        // 页面加载完成后显示第一条信息
+        window.addEventListener('load', () => {
+            // 初始化左侧欢迎语切换
+            subtitleMessage.classList.add('visible');
+            setInterval(nextSubtitleMessage, 4000);
+
+            // 初始化语录显示
+            currentQuoteIndex = Math.floor(Math.random() * gameQuotes.length);
+            showQuote(currentQuoteIndex);
+            // 每10秒自动切换语录
+            setInterval(nextQuote, 10000);
+        });
+
         // 游戏哲理语录
         const gameQuotes = [
             { text: "只要还活着，就有希望。", source: "《合金装备》Snake" },
@@ -1452,15 +1533,6 @@
             currentQuoteIndex = (currentQuoteIndex + 1) % gameQuotes.length;
             showQuote(currentQuoteIndex);
         }
-
-        // 页面加载完成后显示第一句语录
-        window.addEventListener('load', () => {
-            // 随机选择初始语录
-            currentQuoteIndex = Math.floor(Math.random() * gameQuotes.length);
-            showQuote(currentQuoteIndex);
-            // 每10秒自动切换
-            setInterval(nextQuote, 10000);
-        });
     </script>
 </body>
 </html>
