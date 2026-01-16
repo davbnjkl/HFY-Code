@@ -1362,6 +1362,11 @@
             bgImage.onload = () => {
                 document.body.style.backgroundImage = `url('${backgroundImages[currentBgIndex]}')`;
             };
+            bgImage.onerror = () => {
+                console.error('背景图片加载失败:', backgroundImages[currentBgIndex]);
+                // 如果图片加载失败，使用渐变背景作为后备
+                document.body.style.backgroundImage = 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ffe6fa 100%)';
+            };
         }
 
         // 每30秒切换背景
@@ -1373,6 +1378,11 @@
             bgImage.src = backgroundImages[0];
             bgImage.onload = () => {
                 document.body.style.backgroundImage = `url('${backgroundImages[0]}')`;
+            };
+            bgImage.onerror = () => {
+                console.error('初始背景图片加载失败:', backgroundImages[0]);
+                // 如果图片加载失败，使用渐变背景作为后备
+                document.body.style.backgroundImage = 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ffe6fa 100%)';
             };
         });
 
