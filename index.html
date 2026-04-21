@@ -31,15 +31,14 @@
             padding: 20px;
             position: relative;
             overflow: hidden;
-            transition: background-image 2s ease-in-out;
         }
 
         /* 漂浮的小图案 */
         .floating-emoji {
             position: absolute;
             font-size: 2rem;
-            opacity: 0.6;
-            animation: float 6s ease-in-out infinite;
+            opacity: 0.45;
+            animation: float 12s ease-in-out infinite;
             pointer-events: none;
             z-index: 1;
         }
@@ -56,18 +55,17 @@
         .emoji-5 { top: 40%; left: 5%; animation-delay: 4s; font-size: 1.5rem; }
 
         .container {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.72);
             border-radius: 30px;
             padding: 40px 30px;
             max-width: 400px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
             position: relative;
             z-index: 15;
             animation: fadeInLeft 0.8s ease-out;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.55);
             max-height: 85vh;
             overflow-y: auto;
             /* 隐藏滚动条 */
@@ -107,20 +105,9 @@
             border-radius: 50%;
             object-fit: cover;
             margin: 0 auto 20px;
-            animation: bounce 2s ease-in-out infinite, pulse 2s ease-in-out infinite;
             box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
             border: 4px solid rgba(255, 255, 255, 0.8);
             transition: opacity 0.3s ease;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3); }
-            50% { box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5); }
         }
 
         /* 空状态提示 */
@@ -136,7 +123,6 @@
             -webkit-text-fill-color: transparent;
             font-family: 'Ma Shan Zheng', cursive;
             letter-spacing: 2px;
-            animation: subtitleShimmer 3s ease-in-out infinite;
             text-shadow: none;
             border-radius: 15px;
             position: relative;
@@ -149,21 +135,10 @@
             display: inline-block;
             position: relative;
             padding: 20px 30px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.74);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(216, 27, 96, 0.1);
-        }
-
-        @keyframes subtitleShimmer {
-            0%, 100% {
-                filter: brightness(1) drop-shadow(0 0 5px rgba(216, 27, 96, 0.4));
-            }
-            50% {
-                filter: brightness(1.2) drop-shadow(0 0 15px rgba(216, 27, 96, 0.7));
-            }
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 8px 24px rgba(216, 27, 96, 0.08);
         }
 
         .empty-tip {
@@ -186,7 +161,7 @@
         }
 
         #titleCanvas {
-            pointer-events: auto;
+            pointer-events: none;
         }
 
         /* 扩大交互区域覆盖整个页面 */
@@ -212,7 +187,7 @@
         }
 
         #titleCanvas {
-            cursor: pointer;
+            cursor: default;
             display: block;
         }
 
@@ -338,8 +313,7 @@
             justify-content: center;
             gap: 5px;
             padding: 10px 18px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.3);
             color: #fff;
             text-decoration: none;
             border-radius: 20px;
@@ -365,12 +339,7 @@
             position: absolute;
             color: #ffd700;
             font-size: 1.2rem;
-            animation: twinkle 1.5s ease-in-out infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+            opacity: 0.68;
         }
 
         .star-1 { top: 15%; left: 25%; animation-delay: 0s; }
@@ -422,7 +391,6 @@
             -webkit-text-fill-color: transparent;
             font-family: 'Ma Shan Zheng', cursive;
             letter-spacing: 2px;
-            animation: subtitleShimmer 3s ease-in-out infinite;
             text-shadow: none;
             border-radius: 15px;
             position: relative;
@@ -435,21 +403,10 @@
             display: inline-block;
             position: relative;
             padding: 20px 30px;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.78);
             border-radius: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px rgba(255, 107, 157, 0.2);
-        }
-
-        @keyframes subtitleShimmer {
-            0%, 100% {
-                filter: brightness(1) drop-shadow(0 0 5px rgba(216, 27, 96, 0.4));
-            }
-            50% {
-                filter: brightness(1.2) drop-shadow(0 0 15px rgba(216, 27, 96, 0.7));
-            }
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 8px 24px rgba(255, 107, 157, 0.1);
         }
 
         .empty-tip {
@@ -461,18 +418,17 @@
 
         /* 右侧信息面板 */
         .info-panel {
-             background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(3px);
+             background: rgba(255, 255, 255, 0.72);
             border-radius: 30px;
             padding: 30px;
             max-width: 420px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
             position: relative;
             z-index: 15;
             animation: fadeInRight 0.8s ease-out;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.55);
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -1114,18 +1070,23 @@
             constructor(canvasId, text, fontSize) {
                 this.canvas = document.getElementById(canvasId);
                 if (!this.canvas) return;
-                this.ctx = this.canvas.getContext('2d');
+                this.ctx = this.canvas.getContext('2d', { alpha: true, desynchronized: true });
                 this.text = text;
                 this.fontSize = fontSize || 150;
                 this.particles = [];
-                this.mouseX = 0;
-                this.mouseY = 0;
-                this.isHovering = false;
+                this.ripples = [];
+                this.raindrops = [];
+                this.dotCache = new Map();
+                this.scale = 1;
+                this.logicalWidth = 0;
+                this.logicalHeight = 0;
+                this.textBounds = null;
+                this.lastFrameTime = performance.now();
+                this.nextDropIn = 0;
                 this.animationFrame = null;
 
                 this.init();
                 this.bindEvents();
-                this.bindGlobalMouseEvents();
             }
 
             init() {
@@ -1135,22 +1096,25 @@
             }
 
             resize() {
-                const scale = 2;
+                const scale = Math.min(window.devicePixelRatio || 1, 1.35);
                 const width = Math.min(window.innerWidth * 0.7, 700);
                 const height = Math.min(window.innerHeight * 0.5, 350);
+                this.scale = scale;
+                this.logicalWidth = Math.round(width);
+                this.logicalHeight = Math.round(height);
                 this.canvas.width = width * scale;
                 this.canvas.height = height * scale;
                 this.canvas.style.width = width + 'px';
                 this.canvas.style.height = height + 'px';
-                this.ctx.scale(scale, scale);
+                this.ctx.setTransform(scale, 0, 0, scale, 0, 0);
+                this.ctx.imageSmoothingEnabled = true;
             }
 
             createParticles() {
-                const scale = 2;
                 const tempCanvas = document.createElement('canvas');
                 const tempCtx = tempCanvas.getContext('2d');
-                tempCanvas.width = this.canvas.width / scale;
-                tempCanvas.height = this.canvas.height / scale;
+                tempCanvas.width = this.logicalWidth;
+                tempCanvas.height = this.logicalHeight;
 
                 const fontSize = Math.min(this.fontSize, tempCanvas.width / this.text.length * 2.5);
                 tempCtx.font = `${fontSize}px "Ma Shan Zheng", cursive`;
@@ -1163,107 +1127,278 @@
                 const pixels = imageData.data;
 
                 this.particles = [];
-                const gap = 1.1 * scale;
+                this.ripples = [];
+                this.raindrops = [];
+                this.dotCache.clear();
+                const gap = tempCanvas.width < 520 ? 3.1 : 2.6;
+                let minX = Infinity;
+                let minY = Infinity;
+                let maxX = -Infinity;
+                let maxY = -Infinity;
 
-                for (let y = 0; y < tempCanvas.height; y += gap / scale) {
-                    for (let x = 0; x < tempCanvas.width; x += gap / scale) {
+                for (let y = 0; y < tempCanvas.height; y += gap) {
+                    for (let x = 0; x < tempCanvas.width; x += gap) {
                         const index = (Math.floor(y) * tempCanvas.width + Math.floor(x)) * 4;
                         const alpha = pixels[index + 3];
 
                         if (alpha > 60) {
+                            const particleAlpha = Math.random() * 0.25 + 0.72;
+                            const size = Math.random() * 1 + 0.85;
                             this.particles.push({
-                                x: x,
-                                y: y,
+                                x,
+                                y,
                                 originX: x,
                                 originY: y,
-                                color: `rgba(${255}, ${255}, ${255}, ${Math.random() * 0.3 + 0.7})`,
-                                size: Math.random() * 1.2 + 0.8,
+                                size,
+                                alpha: particleAlpha,
+                                sprite: this.getParticleSprite(size, particleAlpha),
                                 vx: 0,
                                 vy: 0,
-                                angle: Math.random() * Math.PI * 2,
-                                speed: Math.random() * 2 + 1
+                                phase: Math.random() * Math.PI * 2,
+                                driftSpeed: Math.random() * 0.02 + 0.01
                             });
+
+                            if (x < minX) minX = x;
+                            if (y < minY) minY = y;
+                            if (x > maxX) maxX = x;
+                            if (y > maxY) maxY = y;
                         }
+                    }
+                }
+
+                if (this.particles.length > 0) {
+                    this.textBounds = {
+                        minX,
+                        minY,
+                        maxX,
+                        maxY,
+                        width: maxX - minX,
+                        height: maxY - minY
+                    };
+                } else {
+                    this.textBounds = {
+                        minX: this.logicalWidth * 0.25,
+                        minY: this.logicalHeight * 0.3,
+                        maxX: this.logicalWidth * 0.75,
+                        maxY: this.logicalHeight * 0.7,
+                        width: this.logicalWidth * 0.5,
+                        height: this.logicalHeight * 0.4
+                    };
+                }
+
+                this.resetRainClock();
+            }
+
+            getParticleSprite(size, alpha) {
+                const key = `${size.toFixed(2)}-${alpha.toFixed(2)}`;
+                if (this.dotCache.has(key)) {
+                    return this.dotCache.get(key);
+                }
+
+                const padding = Math.ceil(size * 2.5);
+                const diameter = Math.ceil(size * 2 + padding * 2);
+                const spriteCanvas = document.createElement('canvas');
+                const spriteCtx = spriteCanvas.getContext('2d');
+                const center = diameter / 2;
+
+                spriteCanvas.width = diameter;
+                spriteCanvas.height = diameter;
+
+                const glow = spriteCtx.createRadialGradient(center, center, size * 0.2, center, center, size + padding * 0.7);
+                glow.addColorStop(0, `rgba(255, 255, 255, ${Math.min(alpha + 0.2, 1)})`);
+                glow.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+                spriteCtx.fillStyle = glow;
+                spriteCtx.beginPath();
+                spriteCtx.arc(center, center, size + padding * 0.75, 0, Math.PI * 2);
+                spriteCtx.fill();
+
+                spriteCtx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+                spriteCtx.beginPath();
+                spriteCtx.arc(center, center, size, 0, Math.PI * 2);
+                spriteCtx.fill();
+
+                const sprite = {
+                    canvas: spriteCanvas,
+                    offset: center
+                };
+                this.dotCache.set(key, sprite);
+                return sprite;
+            }
+
+            bindEvents() {
+                this.handleResize = () => {
+                    this.resize();
+                    this.createParticles();
+                };
+
+                window.addEventListener('resize', this.handleResize, { passive: true });
+            }
+
+            resetRainClock() {
+                this.nextDropIn = 180 + Math.random() * 260;
+            }
+
+            spawnRainDrop() {
+                if (!this.textBounds) {
+                    return;
+                }
+
+                const horizontalPadding = 54;
+                const verticalPadding = 26;
+                const startX = Math.max(12, this.textBounds.minX - horizontalPadding);
+                const endX = Math.min(this.logicalWidth - 12, this.textBounds.maxX + horizontalPadding);
+                const impactTop = Math.max(20, this.textBounds.minY - verticalPadding);
+                const impactBottom = Math.min(this.logicalHeight - 20, this.textBounds.maxY + verticalPadding);
+                const x = startX + Math.random() * Math.max(1, endX - startX);
+                const targetY = impactTop + Math.random() * Math.max(1, impactBottom - impactTop);
+                const fullTextCoverage = Math.min(
+                    this.logicalWidth * 0.92,
+                    Math.max(this.textBounds.width + 90, this.textBounds.height * 2.4, 190)
+                );
+
+                this.raindrops.push({
+                    x,
+                    y: -38 - Math.random() * 120,
+                    targetY,
+                    speed: 9 + Math.random() * 3.8,
+                    length: 30 + Math.random() * 20,
+                    width: 2 + Math.random() * 1.2,
+                    alpha: 0.2 + Math.random() * 0.12,
+                    splashStrength: 5.5 + Math.random() * 2.5,
+                    splashRadius: fullTextCoverage
+                });
+
+                if (this.raindrops.length > 5) {
+                    this.raindrops.splice(0, this.raindrops.length - 5);
+                }
+            }
+
+            pushRipple(x, y, strength, radius, life = 24 + Math.random() * 6) {
+                this.ripples.push({
+                    x,
+                    y,
+                    strength,
+                    radius,
+                    age: 0,
+                    life
+                });
+
+                if (this.ripples.length > 4) {
+                    this.ripples.splice(0, this.ripples.length - 4);
+                }
+            }
+
+            updateRipples(frameFactor) {
+                for (let i = this.ripples.length - 1; i >= 0; i -= 1) {
+                    this.ripples[i].age += frameFactor;
+                    if (this.ripples[i].age >= this.ripples[i].life) {
+                        this.ripples.splice(i, 1);
                     }
                 }
             }
 
-            bindEvents() {
-                this.canvas.addEventListener('mousemove', (e) => {
-                    const rect = this.canvas.getBoundingClientRect();
-                    this.mouseX = e.clientX - rect.left;
-                    this.mouseY = e.clientY - rect.top;
-                    this.isHovering = true;
-                });
+            updateRain(frameFactor, deltaMs) {
+                this.nextDropIn -= deltaMs;
+                while (this.nextDropIn <= 0) {
+                    this.spawnRainDrop();
+                    this.nextDropIn += 240 + Math.random() * 320;
+                    if (Math.random() > 0.84) {
+                        this.nextDropIn -= 60 + Math.random() * 80;
+                    }
+                }
 
-                this.canvas.addEventListener('mouseleave', () => {
-                    this.isHovering = false;
-                });
+                for (let i = this.raindrops.length - 1; i >= 0; i -= 1) {
+                    const drop = this.raindrops[i];
+                    drop.y += drop.speed * frameFactor;
 
-                this.canvas.addEventListener('click', () => {
-                    this.explode();
-                });
-
-                window.addEventListener('resize', () => {
-                    this.resize();
-                    this.createParticles();
-                });
+                    if (drop.y >= drop.targetY) {
+                        this.pushRipple(drop.x, drop.targetY, drop.splashStrength, drop.splashRadius);
+                        this.raindrops.splice(i, 1);
+                    }
+                }
             }
 
-            bindGlobalMouseEvents() {
-                document.addEventListener('mousemove', (e) => {
-                    const rect = this.canvas.getBoundingClientRect();
-                    this.mouseX = e.clientX - rect.left;
-                    this.mouseY = e.clientY - rect.top;
-                    this.isHovering = true;
-                });
+            drawRain() {
+                if (this.raindrops.length === 0) {
+                    return;
+                }
+
+                this.ctx.save();
+                this.ctx.lineCap = 'round';
+
+                for (let i = 0; i < this.raindrops.length; i += 1) {
+                    const drop = this.raindrops[i];
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(drop.x, drop.y - drop.length);
+                    this.ctx.lineTo(drop.x, drop.y);
+                    this.ctx.strokeStyle = `rgba(255, 255, 255, ${drop.alpha})`;
+                    this.ctx.lineWidth = drop.width;
+                    this.ctx.stroke();
+                }
+
+                this.ctx.restore();
             }
 
-            explode() {
-                this.particles.forEach(p => {
-                    const angle = Math.random() * Math.PI * 2;
-                    const force = Math.random() * 10 + 5;
-                    p.vx = Math.cos(angle) * force;
-                    p.vy = Math.sin(angle) * force;
-                });
-            }
+            animate(now = performance.now()) {
+                const deltaMs = Math.min(34, now - this.lastFrameTime || 16.7);
+                const frameFactor = deltaMs / 16.7;
+                this.lastFrameTime = now;
 
-            animate() {
-                const scale = 2;
-                this.ctx.clearRect(0, 0, this.canvas.width / scale, this.canvas.height / scale);
+                this.updateRain(frameFactor, deltaMs);
+                this.updateRipples(frameFactor);
+                this.ctx.clearRect(0, 0, this.logicalWidth, this.logicalHeight);
+                this.drawRain();
 
-                this.particles.forEach(p => {
-                    let targetX = p.originX;
-                    let targetY = p.originY;
+                for (let i = 0; i < this.particles.length; i += 1) {
+                    const p = this.particles[i];
+                    let offsetX = 0;
+                    let offsetY = 0;
 
-                    if (this.isHovering) {
-                        const dx = p.x - this.mouseX;
-                        const dy = p.y - this.mouseY;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        const maxDistance = 80;
+                    for (let j = 0; j < this.ripples.length; j += 1) {
+                        const ripple = this.ripples[j];
+                        const dx = p.originX - ripple.x;
+                        const dy = p.originY - ripple.y;
+                        const distanceSq = dx * dx + dy * dy;
+                        const range = ripple.radius + ripple.age * 2.8;
 
-                        if (distance < maxDistance) {
-                            const angle = Math.atan2(dy, dx);
-                            const force = (maxDistance - distance) / maxDistance;
-                            targetX = p.originX + Math.cos(angle) * force * 60;
-                            targetY = p.originY + Math.sin(angle) * force * 60;
+                        if (distanceSq >= range * range) {
+                            continue;
                         }
+
+                        const distance = Math.sqrt(distanceSq) || 0.001;
+                        const falloff = 1 - distance / range;
+                        const decay = 1 - ripple.age / ripple.life;
+                        const force = falloff * falloff * ripple.strength * decay;
+                        offsetX += (dx / distance) * force;
+                        offsetY += (dy / distance) * force;
                     }
 
-                    p.x += (targetX - p.x) * 0.1;
-                    p.y += (targetY - p.y) * 0.1;
+                    const targetX = p.originX + offsetX;
+                    const targetY = p.originY + offsetY;
+                    p.vx += (targetX - p.x) * 0.072 * frameFactor;
+                    p.vy += (targetY - p.y) * 0.072 * frameFactor;
 
-                    p.x += Math.sin(p.angle) * 0.15;
-                    p.y += Math.cos(p.angle) * 0.15;
-                    p.angle += 0.01;
+                    const damping = Math.pow(0.81, frameFactor);
+                    p.vx *= damping;
+                    p.vy *= damping;
+                    p.x += p.vx;
+                    p.y += p.vy;
 
-                    this.ctx.beginPath();
-                    this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    this.ctx.fillStyle = p.color;
-                    this.ctx.fill();
-                });
+                    p.phase += p.driftSpeed * frameFactor;
+                    const driftX = Math.sin(p.phase) * 0.18;
+                    const driftY = Math.cos(p.phase * 0.92) * 0.18;
+                    const drawX = p.x + driftX;
+                    const drawY = p.y + driftY;
 
-                this.animationFrame = requestAnimationFrame(() => this.animate());
+                    this.ctx.drawImage(
+                        p.sprite.canvas,
+                        drawX - p.sprite.offset,
+                        drawY - p.sprite.offset
+                    );
+                }
+
+                this.animationFrame = requestAnimationFrame((nextFrame) => this.animate(nextFrame));
             }
 
             changeText(newText) {
@@ -1279,15 +1414,6 @@
 
             // 每10秒切换文字动画效果
             const texts = ['小皮皮虾'];
-            let currentIndex = 0;
-
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % texts.length;
-                if (titleParticleText) {
-                    titleParticleText.changeText(texts[currentIndex]);
-                }
-            }, 10000);
-
             // 初始化语录的visible状态
             const quoteDisplay = document.getElementById('quoteDisplay');
             if (quoteDisplay) {
@@ -1354,12 +1480,21 @@
             'images/bg3.jpg',
             'images/bg4.jpg',
         ];
+        const preloadedBackgroundImages = backgroundImages.map((src) => {
+            const img = new Image();
+            img.decoding = 'async';
+            img.src = src;
+            return img;
+        });
         let currentBgIndex = 0;
 
         function changeBackground() {
             currentBgIndex = (currentBgIndex + 1) % backgroundImages.length;
-            const bgImage = new Image();
-            bgImage.src = backgroundImages[currentBgIndex];
+            const bgImage = preloadedBackgroundImages[currentBgIndex];
+            if (bgImage.complete) {
+                document.body.style.backgroundImage = `url('${backgroundImages[currentBgIndex]}')`;
+                return;
+            }
             bgImage.onload = () => {
                 document.body.style.backgroundImage = `url('${backgroundImages[currentBgIndex]}')`;
             };
@@ -1375,8 +1510,11 @@
 
         // 初始化背景
         window.addEventListener('load', () => {
-            const bgImage = new Image();
-            bgImage.src = backgroundImages[0];
+            const bgImage = preloadedBackgroundImages[0];
+            if (bgImage.complete) {
+                document.body.style.backgroundImage = `url('${backgroundImages[0]}')`;
+                return;
+            }
             bgImage.onload = () => {
                 document.body.style.backgroundImage = `url('${backgroundImages[0]}')`;
             };
@@ -1401,13 +1539,20 @@
         }
 
         // 创建几个额外的漂浮emoji
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 1; i++) {
             createFloatingEmoji();
         }
 
         // 随机切换logo图片
+        const logoImages = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg'];
+        const preloadedLogoImages = logoImages.map((src) => {
+            const img = new Image();
+            img.decoding = 'async';
+            img.src = src;
+            return img;
+        });
+
         function rotateLogo() {
-            const logoImages = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg'];
             let currentIndex = 0;
             const logo = document.getElementById('mainLogo');
 
@@ -1415,7 +1560,7 @@
                 currentIndex = (currentIndex + 1) % logoImages.length;
                 logo.style.opacity = '0';
                 setTimeout(() => {
-                    logo.src = logoImages[currentIndex];
+                    logo.src = preloadedLogoImages[currentIndex].src;
                     logo.style.opacity = '1';
                 }, 300);
             }, 10000);
