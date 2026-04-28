@@ -985,8 +985,8 @@
             --bg-0: #020611;
             --bg-1: #061225;
             --bg-2: #0a1c33;
-            --panel-0: rgba(6, 16, 32, 0.94);
-            --panel-1: rgba(10, 28, 52, 0.94);
+            --panel-0: rgba(6, 16, 32, 0.28);
+            --panel-1: rgba(10, 28, 52, 0.2);
             --panel-edge: rgba(110, 242, 255, 0.22);
             --panel-inner: rgba(255, 255, 255, 0.04);
             --text-main: #e8fbff;
@@ -1005,10 +1005,11 @@
             overflow-x: hidden;
             overflow-y: auto;
             background:
-                radial-gradient(circle at 18% 18%, rgba(29, 207, 255, 0.20), transparent 26%),
-                radial-gradient(circle at 82% 12%, rgba(113, 242, 255, 0.16), transparent 20%),
-                radial-gradient(circle at 50% 78%, rgba(23, 105, 255, 0.18), transparent 30%),
-                linear-gradient(135deg, var(--bg-0) 0%, var(--bg-1) 42%, var(--bg-2) 100%);
+                radial-gradient(circle at 18% 18%, rgba(29, 207, 255, 0.08), transparent 24%),
+                radial-gradient(circle at 82% 12%, rgba(113, 242, 255, 0.06), transparent 18%),
+                radial-gradient(circle at 50% 78%, rgba(23, 105, 255, 0.07), transparent 26%),
+                url('images/bg1.png') center / cover no-repeat fixed;
+            background-color: var(--bg-0);
         }
 
         body::before,
@@ -1024,14 +1025,13 @@
                 linear-gradient(rgba(113, 242, 255, 0.07) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(113, 242, 255, 0.07) 1px, transparent 1px);
             background-size: 78px 78px;
-            opacity: 0.18;
+            opacity: 0.1;
             mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
         }
 
         body::after {
             background:
-                radial-gradient(circle at center, transparent 0 38%, rgba(0, 0, 0, 0.38) 78%),
-                linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 18%, transparent 82%, rgba(113, 242, 255, 0.04));
+                linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 18%, transparent 82%, rgba(113, 242, 255, 0.015));
         }
 
         .floating-emoji,
@@ -1062,6 +1062,7 @@
                 0 0 32px rgba(29, 207, 255, 0.10),
                 inset 0 0 0 1px var(--panel-inner);
             color: var(--text-main);
+            backdrop-filter: blur(18px) saturate(1.08);
         }
 
         .container::before,
@@ -1122,8 +1123,8 @@
             padding: 24px;
             border-radius: 30px 12px 30px 12px;
             background:
-                linear-gradient(160deg, rgba(8, 26, 47, 0.94), rgba(4, 10, 21, 0.98)),
-                linear-gradient(90deg, rgba(113, 242, 255, 0.03), transparent 36%, rgba(255, 184, 107, 0.04) 100%);
+                linear-gradient(160deg, rgba(8, 26, 47, 0.22), rgba(4, 10, 21, 0.28)),
+                linear-gradient(90deg, rgba(113, 242, 255, 0.02), transparent 36%, rgba(255, 184, 107, 0.024) 100%);
             border: 1px solid rgba(113, 242, 255, 0.18);
             box-shadow:
                 0 0 0 1px rgba(255, 255, 255, 0.03) inset,
@@ -1134,6 +1135,7 @@
             overflow: hidden;
             isolation: isolate;
             text-align: left;
+            backdrop-filter: blur(20px) saturate(1.06);
         }
 
         .title-container::before {
@@ -1150,13 +1152,14 @@
             padding: clamp(34px, 4vw, 48px);
             clip-path: polygon(0 24px, 24px 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%);
             background:
-                linear-gradient(180deg, rgba(7, 18, 34, 0.82), rgba(4, 10, 20, 0.92)),
-                linear-gradient(90deg, rgba(113, 242, 255, 0.04), transparent 34%, rgba(255, 184, 107, 0.04) 100%);
+                linear-gradient(180deg, rgba(7, 18, 34, 0.16), rgba(4, 10, 20, 0.22)),
+                linear-gradient(90deg, rgba(113, 242, 255, 0.024), transparent 34%, rgba(255, 184, 107, 0.024) 100%);
             border: 1px solid rgba(113, 242, 255, 0.12);
             box-shadow:
                 inset 0 0 0 1px rgba(255, 255, 255, 0.03),
                 inset 0 24px 40px rgba(113, 242, 255, 0.03);
             overflow: hidden;
+            backdrop-filter: blur(16px);
         }
 
         .title-shell > * {
@@ -1305,8 +1308,9 @@
             min-height: 110px;
             padding: 18px 18px 16px;
             border: 1px solid rgba(113, 242, 255, 0.14);
-            background: linear-gradient(180deg, rgba(9, 25, 44, 0.96), rgba(4, 11, 22, 0.96));
+            background: linear-gradient(180deg, rgba(9, 25, 44, 0.32), rgba(4, 11, 22, 0.4));
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(14px);
         }
 
         .title-meta-card::before {
@@ -1437,7 +1441,7 @@
             margin-bottom: 22px;
             border-radius: 18px 6px 18px 6px;
             border: 1px solid rgba(113, 242, 255, 0.18);
-            background: linear-gradient(90deg, rgba(113, 242, 255, 0.10), rgba(113, 242, 255, 0.02));
+            background: linear-gradient(90deg, rgba(113, 242, 255, 0.06), rgba(113, 242, 255, 0.015));
             color: var(--accent);
             font-family: 'Rajdhani', 'Noto Sans SC', sans-serif;
             font-size: 1.08rem;
@@ -1479,13 +1483,14 @@
             padding: 16px 18px;
             border-radius: 18px 6px 18px 6px;
             border: 1px solid rgba(113, 242, 255, 0.22);
-            background: linear-gradient(135deg, rgba(10, 29, 53, 0.96), rgba(5, 15, 31, 0.98));
+            background: linear-gradient(135deg, rgba(10, 29, 53, 0.28), rgba(5, 15, 31, 0.38));
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
             color: var(--text-main);
             font-family: 'Rajdhani', 'Noto Sans SC', sans-serif;
             font-size: 1.03rem;
             font-weight: 700;
             letter-spacing: 0.06em;
+            backdrop-filter: blur(14px);
         }
 
         .link-item::before {
@@ -1516,7 +1521,7 @@
         .link-item:nth-child(4),
         .link-item:nth-child(5),
         .link-item:nth-child(6) {
-            background: linear-gradient(135deg, rgba(10, 29, 53, 0.96), rgba(5, 15, 31, 0.98));
+            background: linear-gradient(135deg, rgba(10, 29, 53, 0.28), rgba(5, 15, 31, 0.38));
         }
 
         .link-icon {
@@ -1590,18 +1595,19 @@
             padding: 8px 14px 8px 10px;
             border-radius: 999px 14px 999px 14px;
             border: 1px solid rgba(113, 242, 255, 0.18);
-            background: rgba(10, 29, 53, 0.74);
+            background: rgba(10, 29, 53, 0.24);
             color: var(--text-main);
             text-shadow: none;
             font-family: 'Orbitron', 'Noto Sans SC', sans-serif;
             font-size: 0.74rem;
             letter-spacing: 0.16em;
             text-transform: uppercase;
+            backdrop-filter: blur(12px);
         }
 
         .external-link:hover {
             transform: translateY(-2px);
-            background: rgba(13, 38, 66, 0.92);
+            background: rgba(13, 38, 66, 0.34);
             border-color: rgba(113, 242, 255, 0.34);
             box-shadow: 0 0 18px rgba(29, 207, 255, 0.12);
         }
@@ -1677,7 +1683,8 @@
             padding: 16px 18px;
             border-radius: 18px 6px 18px 6px;
             border: 1px solid rgba(113, 242, 255, 0.14);
-            background: linear-gradient(90deg, rgba(113, 242, 255, 0.08), transparent 80%);
+            background: linear-gradient(90deg, rgba(113, 242, 255, 0.04), rgba(113, 242, 255, 0.01) 48%, transparent 84%);
+            backdrop-filter: blur(12px);
         }
 
         .location-text {
@@ -1700,12 +1707,13 @@
             padding: 22px;
             border-radius: 18px 6px 18px 6px;
             border: 1px solid rgba(113, 242, 255, 0.14);
-            background: linear-gradient(180deg, rgba(8, 24, 45, 0.96), rgba(4, 13, 27, 0.96));
+            background: linear-gradient(180deg, rgba(8, 24, 45, 0.28), rgba(4, 13, 27, 0.38));
             color: #d8f8ff;
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
             text-align: left;
             line-height: 1.85;
             font-family: 'Noto Sans SC', sans-serif;
+            backdrop-filter: blur(14px);
         }
 
         .quote-item .quote-text {
@@ -1862,6 +1870,454 @@
             }
         }
     </style>
+    <style id="sci-fi-zh-tuning">
+        .main-wrapper {
+            grid-template-columns: minmax(280px, 350px) minmax(0, 1fr) minmax(280px, 340px);
+            width: min(100%, 1400px);
+            gap: clamp(16px, 2vw, 26px);
+            align-items: stretch;
+        }
+
+        .main-wrapper > * {
+            min-width: 0;
+        }
+
+        .container,
+        .info-panel,
+        .title-container,
+        .title-shell,
+        .title-copy,
+        .title-meta-card,
+        .link-item,
+        .link-copy,
+        .external-link,
+        .location-section,
+        .quote-item {
+            min-width: 0;
+        }
+
+        .container::before {
+            content: '接入舱 ACCESS HUB';
+        }
+
+        .info-panel::before {
+            content: '节点遥测 TELEMETRY';
+        }
+
+        .title-container::before {
+            content: '核心中枢 CORE NODE';
+        }
+
+        .container,
+        .info-panel {
+            backdrop-filter: blur(16px);
+        }
+
+        .container {
+            padding: 64px 24px 22px;
+        }
+
+        .info-panel {
+            padding: 62px 24px 22px;
+        }
+
+        .title-container {
+            padding: 12px;
+        }
+
+        .title-shell {
+            grid-template-rows: auto auto auto;
+            gap: 14px;
+            padding: 28px 24px;
+        }
+
+        .title-hud {
+            display: none;
+        }
+
+        .hud-chip {
+            min-height: auto;
+            max-width: 100%;
+            padding: 9px 14px;
+            line-height: 1.4;
+            letter-spacing: 0.16em;
+            text-transform: none;
+            white-space: normal;
+            overflow-wrap: anywhere;
+        }
+
+        .title-kicker,
+        .title-roman,
+        .title-footer-note,
+        .meta-label,
+        .link-kicker,
+        .link-label,
+        .date-display,
+        .location-text,
+        .subtitle,
+        .title-description {
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .title-copy {
+            gap: 10px;
+        }
+
+        .title-kicker {
+            font-size: 0.74rem;
+            letter-spacing: 0.14em;
+            line-height: 1.6;
+            text-transform: none;
+        }
+
+        .title-wordmark {
+            max-width: 100%;
+            font-size: clamp(2.7rem, 4.4vw, 4.3rem);
+            line-height: 0.98;
+            letter-spacing: 0.06em;
+            margin-bottom: 4px;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            text-wrap: balance;
+        }
+
+        .title-roman {
+            font-size: clamp(0.84rem, 1.05vw, 0.98rem);
+            letter-spacing: 0.2em;
+            margin-top: 10px;
+        }
+
+        .title-description {
+            max-width: 100%;
+            font-size: 0.94rem;
+            line-height: 1.7;
+        }
+
+        .title-meta-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .title-meta-card {
+            min-height: 84px;
+            padding: 14px 14px 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .meta-label {
+            margin-bottom: 8px;
+            font-size: 0.62rem;
+            letter-spacing: 0.12em;
+            line-height: 1.45;
+            text-transform: none;
+        }
+
+        .title-meta-card strong {
+            font-size: clamp(0.98rem, 1.18vw, 1.16rem);
+            letter-spacing: 0.04em;
+            line-height: 1.3;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .title-footer {
+            padding-top: 0;
+            border-top: 0;
+            justify-content: flex-start;
+            align-items: flex-end;
+        }
+
+        .subtitle {
+            margin-bottom: 12px;
+            padding: 12px 14px;
+            text-align: left;
+            letter-spacing: 0.05em;
+            text-transform: none;
+        }
+
+        .subtitle::before {
+            content: '当前状态';
+            margin-bottom: 6px;
+            letter-spacing: 0.12em;
+        }
+
+        .panel-caption {
+            margin: -2px 0 14px;
+            padding-left: 12px;
+            border-left: 2px solid rgba(113, 242, 255, 0.28);
+            color: var(--text-soft);
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.84rem;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .links {
+            gap: 10px;
+        }
+
+        .link-item {
+            grid-template-columns: 44px minmax(0, 1fr) auto;
+            min-height: 78px;
+            padding: 12px 14px;
+            gap: 12px;
+            letter-spacing: 0.04em;
+        }
+
+        .link-copy {
+            gap: 5px;
+        }
+
+        .link-kicker {
+            font-size: 0.6rem;
+            letter-spacing: 0.12em;
+            line-height: 1.4;
+            text-transform: none;
+        }
+
+        .link-text {
+            color: var(--text-main);
+            font-size: 0.94rem;
+            line-height: 1.4;
+            letter-spacing: 0.04em;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .link-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 58px;
+            padding: 8px 10px;
+            border: 1px solid rgba(113, 242, 255, 0.18);
+            border-radius: 999px;
+            background: rgba(113, 242, 255, 0.07);
+            color: var(--accent);
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            white-space: normal;
+            line-height: 1.15;
+            text-align: center;
+        }
+
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            align-items: stretch;
+        }
+
+        .external-link {
+            width: 100%;
+            min-width: 0;
+            grid-template-columns: 34px minmax(0, 1fr);
+            min-height: 42px;
+            padding: 8px 10px 8px 10px;
+            border-radius: 16px 6px 16px 6px;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 0.76rem;
+            letter-spacing: 0.04em;
+            text-transform: none;
+        }
+
+        .link-label {
+            line-height: 1.3;
+            text-align: left;
+        }
+
+        .logo {
+            width: 128px;
+            height: 128px;
+            margin-bottom: 14px;
+        }
+
+        .link-icon {
+            width: 44px;
+            height: 44px;
+        }
+
+        .link-icon-svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .external-link .link-icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        .external-link .link-icon-svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .time-display {
+            font-size: clamp(1.74rem, 2.3vw, 2.56rem);
+            letter-spacing: 0.08em;
+        }
+
+        .date-display {
+            font-size: 0.86rem;
+            line-height: 1.5;
+            letter-spacing: 0.04em;
+            text-transform: none;
+        }
+
+        .info-top::before {
+            content: '本地时间';
+        }
+
+        .info-bottom::before {
+            content: '灵感摘录';
+        }
+
+        .location-section {
+            display: grid;
+            gap: 8px;
+            margin-top: 14px;
+            padding: 14px 16px;
+        }
+
+        .location-decoration {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-soft);
+        }
+
+        .location-decoration::before {
+            content: '区域坐标';
+            font-family: 'Orbitron', 'Noto Sans SC', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+        }
+
+        .location-decoration::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(113, 242, 255, 0.35), rgba(113, 242, 255, 0.04));
+        }
+
+        .location-text {
+            font-size: 0.98rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            line-height: 1.45;
+        }
+
+        .quote-item,
+        .welcome-message {
+            min-height: 120px;
+            padding: 16px;
+            display: grid;
+            align-content: start;
+            gap: 10px;
+        }
+
+        .quote-item .quote-text {
+            white-space: pre-line;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+            font-style: normal;
+            margin-bottom: 0;
+            font-size: 0.92rem;
+            line-height: 1.65;
+        }
+
+        .quote-item .quote-source {
+            font-size: 0.76rem;
+            letter-spacing: 0.08em;
+            text-transform: none;
+            text-align: left;
+        }
+
+        .info-top,
+        .info-bottom {
+            padding-top: 12px;
+        }
+
+        .info-bottom {
+            padding-top: 20px;
+        }
+
+        @media (max-width: 1200px) {
+            .main-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .title-meta-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container,
+            .info-panel {
+                padding: 56px 18px 18px;
+            }
+
+            .title-shell {
+                padding: 24px 18px;
+            }
+
+            .hud-line {
+                display: none;
+            }
+
+            .hud-chip {
+                flex: 1 1 120px;
+                justify-content: center;
+            }
+
+            .title-wordmark {
+                font-size: clamp(2.2rem, 13vw, 3.4rem);
+                letter-spacing: 0.06em;
+            }
+
+            .title-meta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .link-item {
+                grid-template-columns: 44px minmax(0, 1fr);
+                align-items: start;
+            }
+
+            .link-arrow {
+                grid-column: 1 / -1;
+                justify-self: stretch;
+                min-width: 0;
+                width: 100%;
+                margin-top: 2px;
+            }
+
+            .links-container {
+                grid-template-columns: 1fr;
+            }
+
+            .external-link {
+                font-size: 0.9rem;
+            }
+
+            .time-display {
+                font-size: 1.82rem;
+                letter-spacing: 0.08em;
+            }
+
+            .location-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="main-wrapper">
@@ -1869,25 +2325,26 @@
         <div class="container">
             <img src="images/1.jpg" alt="Logo" class="logo" id="mainLogo">
 
-            <p class="subtitle" id="subtitleText">欢迎来到小皮皮虾的小天地</p>
+            <p class="subtitle" id="subtitleText">欢迎进入小皮皮虾的控制台</p>
+            <p class="panel-caption">常用站点</p>
 
             <!-- 按钮容器（动态生成） -->
             <div class="links"></div>
-            <p class="empty-tip">暂无项目按钮</p>
+            <p class="empty-tip">暂时还没有可用入口</p>
 
             <!-- 外部链接按钮 -->
             <div class="links-container">
                 <a href="https://github.com" target="_blank" rel="noreferrer" class="external-link">
                     <span class="link-icon" aria-hidden="true"></span>
-                    <span class="link-label">GitHub</span>
+                    <span class="link-label">GitHub 仓库</span>
                 </a>
                 <a href="https://www.bilibili.com" target="_blank" rel="noreferrer" class="external-link">
                     <span class="link-icon" aria-hidden="true"></span>
-                    <span class="link-label">Bilibili</span>
+                    <span class="link-label">哔哩哔哩</span>
                 </a>
                 <a href="https://www.baidu.com" target="_blank" rel="noreferrer" class="external-link">
                     <span class="link-icon" aria-hidden="true"></span>
-                    <span class="link-label">Baidu</span>
+                    <span class="link-label">百度搜索</span>
                 </a>
             </div>
         </div>
@@ -1895,29 +2352,27 @@
         <!-- 中间大标题 -->
         <div class="title-container">
             <div class="title-shell">
-                <div class="title-hud">
-                    <span class="hud-chip">SECTOR-09</span>
-                    <span class="hud-line" aria-hidden="true"></span>
-                    <span class="hud-chip hud-chip--live">LINK CORE</span>
-                    <span class="hud-chip hud-chip--warn">HARD-SCI-FI</span>
-                </div>
                 <div class="title-copy">
-                    <p class="title-kicker">PERSONAL PORTAL / ORBITAL CONTROL INTERFACE</p>
+                    <p class="title-kicker">个人主站 / 轨道控制界面</p>
                     <h1 class="title-wordmark">小皮皮虾</h1>
                     <p class="title-roman">XIAO PIPI XIA</p>
-                    <p class="title-description">把个人项目、实验页面和跳转入口收束成一块更干净、更硬核的科幻控制终端，保留氛围感，同时把高开销的粒子动画全部移除。</p>
+                    <p class="title-description">控制界面</p>
                 </div>
                 <div class="title-meta-grid">
                     <div class="title-meta-card">
-                        <span class="meta-label">NODE STATUS</span>
-                        <strong>ONLINE</strong>
+                        <span class="meta-label">节点状态</span>
+                        <strong>在线运行</strong>
                     </div>
                     <div class="title-meta-card">
-                        <span class="meta-label">ACTIVE ROUTES</span>
-                        <strong id="titleRouteCount">01</strong>
+                        <span class="meta-label">活动入口</span>
+                        <strong><span id="titleRouteCount">01</span> 个</strong>
                     </div>
                     <div class="title-meta-card">
-                        <span class="meta-label">BUILD YEAR</span>
+                        <span class="meta-label">界面协议</span>
+                        <strong>静态终端</strong>
+                    </div>
+                    <div class="title-meta-card">
+                        <span class="meta-label">构建年份</span>
                         <strong id="titleBuildYear">2026</strong>
                     </div>
                 </div>
@@ -1930,7 +2385,6 @@
                         <span class="spectrum-bar"></span>
                         <span class="spectrum-bar"></span>
                     </div>
-                    <p class="title-footer-note">LOW LATENCY VISUALS / STATIC CORE / READY FOR SITE TRANSFER</p>
                 </div>
             </div>
         </div>
@@ -1942,7 +2396,7 @@
                 <div class="date-display" id="dateDisplay">2025年1月1日 星期一</div>
                 <div class="location-section">
                     <div class="location-decoration"></div>
-                    <div class="location-text">上海市徐汇区</div>
+                    <div class="location-text">上海市徐汇区 </div>
                 </div>
             </div>
             <div class="info-bottom">
@@ -1956,7 +2410,7 @@
     <script>
         // 动态生成按钮的配置
         const buttonConfig = [
-            { href: 'build_sy/', kicker: 'GAME ARCHIVE', text: '原水小子诞生记' },
+            { href: 'build_sy/', kicker: '合成大sy', text: '原水小子诞生记' },
             // { href: 'Web/005/refresh.html', kicker: 'WEB EXPERIMENT', text: '原水小子' },
             // { href: 'Web/007', kicker: 'PERSONAL NODE', text: 'jx宝宝' },
             // { href: 'Web/008', kicker: 'PERSONAL NODE', text: 'gjy宝宝' },
@@ -1998,14 +2452,14 @@
                 const link = document.createElement('a');
                 link.href = button.href;
                 link.className = 'link-item';
-                link.setAttribute('aria-label', `${button.text} 页面入口`);
+                link.setAttribute('aria-label', `进入${button.text}`);
                 link.innerHTML = `
                     <span class="link-icon" aria-hidden="true">${outboundIconMarkup}</span>
                     <span class="link-copy">
-                        <span class="link-kicker">${button.kicker || `NODE-${String(index + 1).padStart(2, '0')}`}</span>
+                        <span class="link-kicker">${button.kicker || `节点-${String(index + 1).padStart(2, '0')}`}</span>
                         <span class="link-text">${button.text}</span>
                     </span>
-                    <span class="link-arrow" aria-hidden="true">ENTER</span>
+                    <span class="link-arrow" aria-hidden="true">进入</span>
                 `;
                 linksContainer.appendChild(link);
             });
@@ -2045,7 +2499,7 @@
         }
         // 缓存控制
         (function() {
-            const CACHE_VERSION = '2026-04-21-v3';
+            const CACHE_VERSION = '2026-04-28-v4';
             const currentVersion = localStorage.getItem('homeCacheVersion');
 
             // 检查版本并清除缓存
@@ -2117,8 +2571,8 @@
 
         // 左侧欢迎语切换
         const subtitleMessages = [
-            "欢迎来到小皮皮虾的小天地",
-            "个人主页正在建设中ing"
+            "欢迎进入小皮皮虾的控制台",
+            "项目入口与实验页面持续整理中"
         ];
         let currentSubtitleIndex = 0;
         const subtitleMessage = document.getElementById('subtitleText');
@@ -2172,8 +2626,7 @@
             quoteDisplay.classList.remove('visible');
 
             setTimeout(() => {
-                // 在逗号处换行
-                const formattedText = quote.text.replace(/，/g, '，\n');
+                const formattedText = quote.text;
                 quoteDisplay.innerHTML = `
                     <div class="quote-text">"${formattedText}"</div>
                     <div class="quote-source">— ${quote.source}</div>

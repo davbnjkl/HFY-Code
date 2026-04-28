@@ -1,0 +1,61 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - text: 接入舱 ACCESS HUB
+    - img "Logo" [ref=e4]
+    - paragraph [ref=e5]: 当前状态 项目入口与实验页面持续整理中
+    - paragraph [ref=e6]: 项目入口、作品归档和常用站点会集中显示在这里，长标题会自动换行，不再挤出边框。
+    - link "进入原水小子诞生记" [ref=e8] [cursor=pointer]:
+      - /url: build_sy/
+      - img [ref=e10]
+      - generic [ref=e15]:
+        - generic [ref=e16]: 项目归档
+        - generic [ref=e17]: 原水小子诞生记
+      - generic [ref=e18]: 进入
+    - generic [ref=e19]:
+      - link "GitHub 仓库" [ref=e20] [cursor=pointer]:
+        - /url: https://github.com
+        - img [ref=e22]
+        - generic [ref=e27]: GitHub 仓库
+      - link "哔哩哔哩" [ref=e28] [cursor=pointer]:
+        - /url: https://www.bilibili.com
+        - img [ref=e30]
+        - generic [ref=e35]: 哔哩哔哩
+      - link "百度搜索" [ref=e36] [cursor=pointer]:
+        - /url: https://www.baidu.com
+        - img [ref=e38]
+        - generic [ref=e43]: 百度搜索
+  - generic [ref=e44]:
+    - text: 核心中枢 CORE NODE
+    - generic [ref=e45]:
+      - generic [ref=e46]:
+        - paragraph [ref=e47]: 个人主站 / 轨道控制界面
+        - heading "小皮皮虾" [level=1] [ref=e48]
+        - paragraph [ref=e49]: XIAO PIPI XIA
+        - paragraph [ref=e50]: 这里集中展示个人项目、实验页面和常用入口，整体收束成更利落、更硬核的静态科幻终端，让信息层级更清晰，也避免中文内容把边框挤破。
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]: 节点状态
+          - strong [ref=e54]: 在线运行
+        - generic [ref=e55]:
+          - generic [ref=e56]: 活动入口
+          - strong [ref=e57]: 01 个
+        - generic [ref=e58]:
+          - generic [ref=e59]: 界面协议
+          - strong [ref=e60]: 静态终端
+        - generic [ref=e61]:
+          - generic [ref=e62]: 构建年份
+          - strong [ref=e63]: "2026"
+  - generic [ref=e72]:
+    - text: 节点遥测 TELEMETRY
+    - generic [ref=e73]:
+      - text: 本地时间
+      - generic [ref=e74]: 16:21:48
+      - generic [ref=e75]: 2026年4月28日 星期二
+      - generic [ref=e76]:
+        - generic [ref=e77]: 区域坐标
+        - generic [ref=e78]: 上海市徐汇区
+    - generic [ref=e79]:
+      - text: 灵感摘录
+      - generic [ref=e81]:
+        - generic [ref=e82]: "\"英雄不是生来就强大，而是在绝境中选择了勇敢。\""
+        - generic [ref=e83]: — 《刺客信条》

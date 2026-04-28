@@ -1,0 +1,14 @@
+[     525ms] [LOG] 主页缓存已清除，版本: 2026-04-28-v4 @ http://127.0.0.1:4173/index.html:2467
+[     867ms] [WARNING] [JavaScript Warning: "downloadable font: Glyph bbox was incorrect (glyph ids 7 11 12 15 20 33 35 38 48 55 59 60 61 62 65 67 69 80 91 92 93 94 104 109 114 117 118 120 121 122 123 124 125 126 132 133 134 143 144 149 164 165 166 168 176 181 183 187 201 202 203) (font-family: "Rajdhani" style:normal weight:700 stretch:100 src index:0) source: https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pa8FvOreec.woff2"] @ :3456
+[     916ms] [WARNING] [JavaScript Warning: "downloadable font: Glyph bbox was incorrect (glyph ids 7 11 12 15 20 33 35 38 48 55 59 60 61 62 65 67 69 80 91 92 93 94 104 109 114 117 118 120 121 122 123 124 125 126 132 133 134 143 144 149 164 165 166 168 176 181 183 187 201 202 203) (font-family: "Rajdhani" style:normal weight:500 stretch:100 src index:0) source: https://fonts.gstatic.com/s/rajdhani/v17/LDI2apCSOBg7S-QT7pb0EPOreec.woff2"] @ :3402
+[   10109ms] [WARNING] [JavaScript Warning: "“127.0.0.1” has been classified as a bounce tracker. If it does not receive user activation within the next 3,600 seconds it will have its state purged."] @ :0
+[  221322ms] SyntaxError: expected expression, got ')'
+    at _promiseAwareJsonValueNoThrow/< (debugger eval code:328:30)
+    at async*_promiseAwareJsonValueNoThrow (debugger eval code:330:9)
+    at evaluate (debugger eval code:311:33)
+    at  (debugger eval code:1:44)
+    at evaluateFunction (chrome://juggler/content/content/Runtime.js:412:60)
+    at callFunction (chrome://juggler/content/content/Runtime.js:103:41)
+    at _onMessageInternal (chrome://juggler/content/SimpleChannel.js:237:37)
+    at _onMessage (chrome://juggler/content/SimpleChannel.js:194:12)
+    at bindToActor/actor.receiveMessage (chrome://juggler/content/SimpleChannel.js:39:44)

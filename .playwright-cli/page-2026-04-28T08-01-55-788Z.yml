@@ -1,0 +1,66 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - text: 接入舱 ACCESS HUB
+    - img "Logo" [ref=e4]
+    - paragraph [ref=e5]: 当前状态 项目入口与实验页面持续整理中
+    - paragraph [ref=e6]: 项目入口、作品归档和常用站点会集中显示在这里，长标题会自动换行，不再挤出边框。
+    - link "进入原水小子诞生记" [ref=e8] [cursor=pointer]:
+      - /url: build_sy/
+      - img [ref=e10]
+      - generic [ref=e15]:
+        - generic [ref=e16]: 项目归档
+        - generic [ref=e17]: 原水小子诞生记
+      - generic [ref=e18]: 进入
+    - generic [ref=e19]:
+      - link "GitHub 仓库" [ref=e20] [cursor=pointer]:
+        - /url: https://github.com
+        - img [ref=e22]
+        - generic [ref=e27]: GitHub 仓库
+      - link "哔哩哔哩" [ref=e28] [cursor=pointer]:
+        - /url: https://www.bilibili.com
+        - img [ref=e30]
+        - generic [ref=e35]: 哔哩哔哩
+      - link "百度搜索" [ref=e36] [cursor=pointer]:
+        - /url: https://www.baidu.com
+        - img [ref=e38]
+        - generic [ref=e43]: 百度搜索
+  - generic [ref=e44]:
+    - text: 核心中枢 CORE NODE
+    - generic [ref=e45]:
+      - generic [ref=e46]:
+        - generic [ref=e47]: 轨道九区
+        - generic [ref=e49]: 节点在线
+        - generic [ref=e50]: 硬核科幻
+      - generic [ref=e51]:
+        - paragraph [ref=e52]: 个人主站 / 轨道控制界面
+        - heading "小皮皮虾" [level=1] [ref=e53]
+        - paragraph [ref=e54]: XIAO PIPI XIA
+        - paragraph [ref=e55]: 这里集中展示个人项目、实验页面和常用入口，整体收束成更利落、更硬核的静态科幻终端，让信息层级更清晰，也避免中文内容把边框挤破。
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - generic [ref=e58]: 节点状态
+          - strong [ref=e59]: 在线运行
+        - generic [ref=e60]:
+          - generic [ref=e61]: 活动入口
+          - strong [ref=e62]: 01 个
+        - generic [ref=e63]:
+          - generic [ref=e64]: 界面协议
+          - strong [ref=e65]: 静态终端
+        - generic [ref=e66]:
+          - generic [ref=e67]: 构建年份
+          - strong [ref=e68]: "2026"
+      - paragraph [ref=e77]: 低延迟静态界面，后续可以继续扩展更多项目入口、展示模块和实验页面。
+  - generic [ref=e78]:
+    - text: 节点遥测 TELEMETRY
+    - generic [ref=e79]:
+      - text: 本地时间
+      - generic [ref=e80]: 16:01:54
+      - generic [ref=e81]: 2026年4月28日 星期二
+      - generic [ref=e82]:
+        - generic [ref=e83]: 区域坐标
+        - generic [ref=e84]: 上海市徐汇区 · 本地节点
+    - generic [ref=e85]:
+      - text: 灵感摘录
+      - generic [ref=e87]:
+        - generic [ref=e88]: "\"每个选择都有代价，重要的是不后悔。\""
+        - generic [ref=e89]: — 《质量效应》
