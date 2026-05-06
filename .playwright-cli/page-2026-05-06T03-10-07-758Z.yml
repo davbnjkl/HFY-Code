@@ -1,0 +1,42 @@
+- main [ref=e2]:
+  - text: TOOL NODE
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: UTILITY-01
+        - generic [ref=e8]: 字符倒序
+        - generic [ref=e9]: 可复制输出
+      - generic [ref=e10]:
+        - paragraph [ref=e11]: 实用工具 / 字符处理
+        - heading "字符倒序工具" [level=1] [ref=e12]
+        - paragraph [ref=e13]: REVERSE TEXT NODE
+        - paragraph [ref=e14]: 输入一句话，系统会按字符逐个逆序输出，并把结果留在独立结果区，方便你继续复制、粘贴和二次处理。
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: 处理方式
+          - generic [ref=e18]: 字符级倒序
+        - generic [ref=e19]:
+          - generic [ref=e20]: 输出状态
+          - generic [ref=e21]: 即时更新
+        - generic [ref=e22]:
+          - generic [ref=e23]: 结果操作
+          - generic [ref=e24]: 一键复制
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27]: 输入内容
+        - textbox "输入内容" [active] [ref=e28]:
+          - /placeholder: 在这里输入一句话
+      - generic [ref=e29]:
+        - generic [ref=e30]: 输出结果
+        - textbox "输出结果" [ref=e31]:
+          - /placeholder: 倒序结果会显示在这里
+    - generic [ref=e32]:
+      - button "倒序输出" [ref=e33] [cursor=pointer]
+      - button "复制结果" [ref=e34] [cursor=pointer]
+      - button "清空内容" [ref=e35] [cursor=pointer]
+    - generic [ref=e37]:
+      - paragraph [ref=e38]:
+        - strong [ref=e39]: 提示：
+        - text: 支持中文、英文、数字与常见符号，按字符逐个倒序，不会额外插入空格或改动内容。
+      - link "返回主页" [ref=e40] [cursor=pointer]:
+        - /url: ../index.html

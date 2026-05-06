@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符倒序工具</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-0: rgba(6, 16, 32, 0.26);
+            --bg-1: rgba(10, 28, 52, 0.18);
+            --panel: rgba(7, 20, 38, 0.22);
+            --panel-strong: rgba(7, 20, 38, 0.3);
+            --edge: rgba(113, 242, 255, 0.24);
+            --edge-soft: rgba(113, 242, 255, 0.12);
+            --text-main: #ebfbff;
+            --text-soft: #a8c5d6;
+            --accent: #71f2ff;
+            --accent-2: #1dcfff;
+            --success: #86ffbf;
+            --warn: #ffb86b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Rajdhani", "Noto Sans SC", sans-serif;
+            color: var(--text-main);
+            background:
+                radial-gradient(circle at 18% 18%, rgba(29, 207, 255, 0.08), transparent 24%),
+                radial-gradient(circle at 82% 12%, rgba(113, 242, 255, 0.06), transparent 18%),
+                radial-gradient(circle at 50% 78%, rgba(23, 105, 255, 0.07), transparent 26%),
+                url('../images/bg1.png') center / cover no-repeat fixed;
+            background-color: #020611;
+            display: grid;
+            place-items: center;
+            padding: clamp(16px, 2.5vw, 28px);
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        body::before {
+            background:
+                linear-gradient(rgba(113, 242, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(113, 242, 255, 0.06) 1px, transparent 1px);
+            background-size: 76px 76px;
+            opacity: 0.1;
+            mask-image: radial-gradient(circle at center, black 35%, transparent 88%);
+        }
+
+        body::after {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 18%, transparent 82%, rgba(113, 242, 255, 0.015));
+        }
+
+        .shell {
+            width: min(100%, 980px);
+            position: relative;
+            overflow: hidden;
+            border-radius: 28px 10px 28px 10px;
+            border: 1px solid var(--edge);
+            background: linear-gradient(180deg, var(--bg-1), var(--bg-0));
+            box-shadow:
+                0 24px 60px rgba(0, 0, 0, 0.34),
+                0 0 32px rgba(29, 207, 255, 0.08),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(18px) saturate(1.08);
+        }
+
+        .shell::before {
+            content: "TOOL NODE";
+            position: absolute;
+            top: 18px;
+            left: 22px;
+            font-family: "Orbitron", "Noto Sans SC", sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.24em;
+            color: var(--text-soft);
+        }
+
+        .shell::after {
+            content: "";
+            position: absolute;
+            inset: 16px;
+            border: 1px solid rgba(113, 242, 255, 0.09);
+            border-radius: 18px 6px 18px 6px;
+            pointer-events: none;
+        }
+
+        .panel {
+            position: relative;
+            z-index: 1;
+            padding: 62px 24px 24px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            gap: 18px;
+            padding: 22px 20px;
+            border-radius: 22px 8px 22px 8px;
+            border: 1px solid rgba(113, 242, 255, 0.16);
+            background:
+                linear-gradient(180deg, rgba(7, 18, 34, 0.16), rgba(4, 10, 20, 0.22)),
+                linear-gradient(90deg, rgba(113, 242, 255, 0.024), transparent 34%, rgba(255, 184, 107, 0.024) 100%);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, transparent 0 8%, rgba(113, 242, 255, 0.05) 8% 9%, transparent 9% 100%),
+                linear-gradient(180deg, rgba(113, 242, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 20px;
+            opacity: 0.38;
+            pointer-events: none;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-hud {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .hud-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 34px;
+            padding: 8px 12px;
+            border: 1px solid rgba(113, 242, 255, 0.18);
+            background: rgba(11, 30, 53, 0.22);
+            color: var(--text-main);
+            font-family: "Orbitron", "Noto Sans SC", sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+        }
+
+        .hud-chip--live::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 12px rgba(113, 242, 255, 0.7);
+        }
+
+        .hud-chip--warn {
+            color: var(--warn);
+            border-color: rgba(255, 184, 107, 0.2);
+            background: rgba(255, 184, 107, 0.08);
+        }
+
+        .hud-line {
+            flex: 1;
+            min-width: 70px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(113, 242, 255, 0.42), rgba(113, 242, 255, 0.06));
+        }
+
+        .hero-copy {
+            display: grid;
+            gap: 10px;
+        }
+
+        .kicker {
+            margin: 0;
+            color: var(--text-soft);
+            font-family: "Orbitron", "Noto Sans SC", sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: "Orbitron", "Noto Sans SC", sans-serif;
+            font-size: clamp(2.2rem, 4.8vw, 3.8rem);
+            line-height: 0.98;
+            letter-spacing: 0.06em;
+            color: #f3feff;
+            text-shadow:
+                0 0 24px rgba(113, 242, 255, 0.2),
+                0 0 40px rgba(29, 207, 255, 0.1);
+        }
+
+        .roman {
+            margin: 2px 0 0;
+            color: var(--accent);
+            font-family: "Orbitron", "JetBrains Mono", monospace;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+        }
+
+        .desc {
+            margin: 0;
+            color: #d7eef6;
+            font-family: "Noto Sans SC", sans-serif;
+            line-height: 1.8;
+            font-size: 0.98rem;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .meta-card {
+            position: relative;
+            min-width: 0;
+            min-height: 86px;
+            padding: 14px 14px 12px;
+            border: 1px solid rgba(113, 242, 255, 0.14);
+            background: linear-gradient(180deg, rgba(9, 25, 44, 0.2), rgba(4, 11, 22, 0.28));
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+        }
+
+        .meta-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        .meta-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-soft);
+            font-family: "Orbitron", "Noto Sans SC", sans-serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            line-height: 1.5;
+        }
+
+        .meta-value {
+            display: block;
+            color: var(--text-main);
+            font-family: "Noto Sans SC", sans-serif;
+            font-size: 0.96rem;
+            line-height: 1.45;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .card {
+            position: relative;
+            min-width: 0;
+            padding: 18px;
+            border-radius: 18px 6px 18px 6px;
+            border: 1px solid rgba(113, 242, 255, 0.18);
+            background: linear-gradient(180deg, rgba(8, 24, 45, 0.2), rgba(4, 13, 27, 0.3));
+            backdrop-filter: blur(14px);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 54px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(113, 242, 255, 0.9), transparent);
+        }
+
+        .card-label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-soft);
+            font-family: "Orbitron", "Noto Sans SC", sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 172px;
+            resize: vertical;
+            border: 1px solid rgba(113, 242, 255, 0.18);
+            border-radius: 14px 6px 14px 6px;
+            background: rgba(3, 12, 24, 0.22);
+            color: var(--text-main);
+            padding: 14px 16px;
+            font-family: "Noto Sans SC", sans-serif;
+            font-size: 1rem;
+            line-height: 1.75;
+            outline: none;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+        }
+
+        textarea[readonly] {
+            background: rgba(3, 12, 24, 0.3);
+        }
+
+        textarea:focus {
+            border-color: rgba(113, 242, 255, 0.44);
+            box-shadow: 0 0 0 3px rgba(113, 242, 255, 0.08);
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        button,
+        .back-link {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50px;
+            padding: 11px 14px;
+            border: 1px solid rgba(113, 242, 255, 0.22);
+            border-radius: 18px 6px 18px 6px;
+            background: linear-gradient(135deg, rgba(10, 29, 53, 0.24), rgba(5, 15, 31, 0.34));
+            color: var(--text-main);
+            font-family: "Noto Sans SC", sans-serif;
+            font-size: 0.96rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            text-decoration: none;
+            backdrop-filter: blur(14px);
+            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover,
+        .back-link:hover {
+            transform: translateY(-2px);
+            border-color: rgba(113, 242, 255, 0.42);
+            background: linear-gradient(135deg, rgba(10, 29, 53, 0.32), rgba(5, 15, 31, 0.44));
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+        }
+
+        .button-primary {
+            color: #031018;
+            background: linear-gradient(135deg, rgba(113, 242, 255, 0.96), rgba(29, 207, 255, 0.88));
+            border-color: rgba(113, 242, 255, 0.56);
+            font-weight: 700;
+        }
+
+        .button-primary:hover {
+            background: linear-gradient(135deg, #90f7ff, #46dbff);
+        }
+
+        .status {
+            min-height: 1.5em;
+            padding: 0 4px;
+            color: var(--success);
+            font-family: "Noto Sans SC", sans-serif;
+            font-size: 0.94rem;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding-top: 4px;
+            border-top: 1px solid var(--edge-soft);
+        }
+
+        .tips {
+            margin: 0;
+            color: var(--text-soft);
+            font-family: "Noto Sans SC", sans-serif;
+            font-size: 0.92rem;
+            line-height: 1.75;
+        }
+
+        .tips strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        @media (max-width: 800px) {
+            .meta-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            .workspace,
+            .actions {
+                grid-template-columns: 1fr;
+            }
+
+            .hud-line {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 14px;
+            }
+
+            .shell::before {
+                top: 16px;
+                left: 18px;
+                font-size: 0.64rem;
+            }
+
+            .panel {
+                padding: 56px 16px 16px;
+            }
+
+            .hero,
+            .card {
+                padding: 16px;
+            }
+
+            h1 {
+                font-size: clamp(2rem, 12vw, 3rem);
+            }
+
+            .roman {
+                font-size: 0.8rem;
+                letter-spacing: 0.16em;
+            }
+
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            textarea {
+                min-height: 140px;
+            }
+
+            .footer {
+                align-items: stretch;
+            }
+
+            .back-link {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="shell">
+        <section class="panel">
+            <div class="hero">
+                <div class="hero-hud">
+                    <span class="hud-chip">UTILITY-01</span>
+                    <span class="hud-line" aria-hidden="true"></span>
+                    <span class="hud-chip hud-chip--live">字符倒序</span>
+                    <span class="hud-chip hud-chip--warn">可复制输出</span>
+                </div>
+                <div class="hero-copy">
+                    <p class="kicker">实用工具 / 字符处理</p>
+                    <h1>字符倒序工具</h1>
+                    <p class="roman">REVERSE TEXT NODE</p>
+                    <p class="desc">输入一句话，系统会按字符逐个逆序输出，并把结果留在独立结果区，方便你继续复制、粘贴和二次处理。</p>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-card">
+                        <span class="meta-label">处理方式</span>
+                        <span class="meta-value">字符级倒序</span>
+                    </div>
+                    <div class="meta-card">
+                        <span class="meta-label">输出状态</span>
+                        <span class="meta-value">即时更新</span>
+                    </div>
+                    <div class="meta-card">
+                        <span class="meta-label">结果操作</span>
+                        <span class="meta-value">一键复制</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="workspace">
+                <section class="card">
+                    <label class="card-label" for="sourceText">输入内容</label>
+                    <textarea id="sourceText" placeholder="在这里输入一句话"></textarea>
+                </section>
+
+                <section class="card">
+                    <label class="card-label" for="resultText">输出结果</label>
+                    <textarea id="resultText" readonly placeholder="倒序结果会显示在这里"></textarea>
+                </section>
+            </div>
+
+            <div class="actions">
+                <button id="reverseButton" class="button-primary" type="button">倒序输出</button>
+                <button id="copyButton" type="button">复制结果</button>
+                <button id="clearButton" type="button">清空内容</button>
+            </div>
+
+            <div id="statusText" class="status" aria-live="polite"></div>
+
+            <div class="footer">
+                <p class="tips"><strong>提示：</strong>支持中文、英文、数字与常见符号，按字符逐个倒序，不会额外插入空格或改动内容。</p>
+                <a class="back-link" href="../index.html">返回主页</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const sourceText = document.getElementById('sourceText');
+        const resultText = document.getElementById('resultText');
+        const statusText = document.getElementById('statusText');
+        const reverseButton = document.getElementById('reverseButton');
+        const copyButton = document.getElementById('copyButton');
+        const clearButton = document.getElementById('clearButton');
+
+        function reverseCharacters(text) {
+            return Array.from(text).reverse().join('');
+        }
+
+        function updateResult() {
+            resultText.value = reverseCharacters(sourceText.value);
+            statusText.textContent = '';
+        }
+
+        async function copyResult() {
+            if (!resultText.value) {
+                statusText.textContent = '当前没有可复制的结果。';
+                return;
+            }
+
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(resultText.value);
+                } else {
+                    resultText.focus();
+                    resultText.select();
+                    document.execCommand('copy');
+                }
+                statusText.textContent = '结果已复制。';
+            } catch (error) {
+                statusText.textContent = '复制失败，请手动选择结果后复制。';
+            }
+        }
+
+        reverseButton.addEventListener('click', updateResult);
+        copyButton.addEventListener('click', copyResult);
+        clearButton.addEventListener('click', () => {
+            sourceText.value = '';
+            resultText.value = '';
+            statusText.textContent = '';
+            sourceText.focus();
+        });
+
+        sourceText.addEventListener('input', updateResult);
+        sourceText.focus();
+    </script>
+</body>
+</html>
