@@ -2108,11 +2108,24 @@
             text-align: center;
         }
 
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 0;
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 4px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .links::-webkit-scrollbar {
+            display: none;
+        }
+
         .links-container {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 8px;
-            align-items: stretch;
+            display: none;
         }
 
         .external-link {
@@ -2131,6 +2144,60 @@
         .link-label {
             line-height: 1.3;
             text-align: left;
+        }
+
+        .site-link {
+            display: grid;
+            grid-template-columns: 34px minmax(0, 1fr);
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            min-width: 0;
+            min-height: 64px;
+            padding: 10px 12px 10px 10px;
+            border-radius: 16px 6px 16px 6px;
+            border: 1px solid rgba(113, 242, 255, 0.2);
+            background: linear-gradient(135deg, rgba(10, 29, 53, 0.24), rgba(5, 15, 31, 0.34));
+            color: var(--text-main);
+            text-decoration: none;
+            backdrop-filter: blur(14px);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .site-link:hover {
+            transform: translateY(-2px);
+            border-color: rgba(113, 242, 255, 0.42);
+            background: linear-gradient(135deg, rgba(10, 29, 53, 0.32), rgba(5, 15, 31, 0.44));
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+        }
+
+        .site-link-copy {
+            min-width: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            text-align: left;
+        }
+
+        .site-link-kicker {
+            color: var(--text-soft);
+            font-family: "Orbitron", "Noto Sans SC", sans-serif;
+            font-size: 0.58rem;
+            line-height: 1.2;
+            letter-spacing: 0.12em;
+            white-space: nowrap;
+        }
+
+        .site-link-text {
+            color: var(--text-main);
+            font-family: "Noto Sans SC", sans-serif;
+            font-size: 0.86rem;
+            line-height: 1.25;
+            letter-spacing: 0.03em;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
 
         .logo {
@@ -2326,27 +2393,10 @@
             <img src="images/1.jpg" alt="Logo" class="logo" id="mainLogo">
 
             <p class="subtitle" id="subtitleText">欢迎进入小皮皮虾的控制台</p>
-            <p class="panel-caption">常用站点</p>
+            <p class="panel-caption">网页入口</p>
 
-            <!-- 按钮容器（动态生成） -->
             <div class="links"></div>
             <p class="empty-tip">暂时还没有可用入口</p>
-
-            <!-- 外部链接按钮 -->
-            <div class="links-container">
-                <a href="https://github.com" target="_blank" rel="noreferrer" class="external-link">
-                    <span class="link-icon" aria-hidden="true"></span>
-                    <span class="link-label">GitHub 仓库</span>
-                </a>
-                <a href="https://www.bilibili.com" target="_blank" rel="noreferrer" class="external-link">
-                    <span class="link-icon" aria-hidden="true"></span>
-                    <span class="link-label">哔哩哔哩</span>
-                </a>
-                <a href="https://www.baidu.com" target="_blank" rel="noreferrer" class="external-link">
-                    <span class="link-icon" aria-hidden="true"></span>
-                    <span class="link-label">百度搜索</span>
-                </a>
-            </div>
         </div>
 
         <!-- 中间大标题 -->
@@ -2412,6 +2462,7 @@
         const buttonConfig = [
             { href: 'build_sy/', kicker: '合成大sy', text: '原水小子诞生记' },
             { href: 'tool/', kicker: '实用工具', text: '字符倒序工具' },
+            { href: 'cipher_game/', kicker: '文字冒险', text: 'sy历险记' },
             // { href: 'Web/005/refresh.html', kicker: 'WEB EXPERIMENT', text: '原水小子' },
             // { href: 'Web/007', kicker: 'PERSONAL NODE', text: 'jx宝宝' },
             // { href: 'Web/008', kicker: 'PERSONAL NODE', text: 'gjy宝宝' },
@@ -2426,12 +2477,6 @@
                 <path d="M13 18H6v-7"></path>
             </svg>
         `;
-
-        function hydrateExternalLinkIcons() {
-            document.querySelectorAll('.external-link .link-icon').forEach((iconNode) => {
-                iconNode.innerHTML = outboundIconMarkup;
-            });
-        }
 
         function generateButtons() {
             const linksContainer = document.querySelector('.links');
@@ -2480,7 +2525,6 @@
         }
 
         function initializeHome() {
-            hydrateExternalLinkIcons();
             generateButtons();
             syncTitleTelemetry();
 

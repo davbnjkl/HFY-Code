@@ -1,0 +1,70 @@
+- main [ref=e2]:
+  - text: CIPHER NODE
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: SECTOR-C1
+        - generic [ref=e8]: 解密链路
+        - generic [ref=e9]: 文字推演
+      - generic [ref=e10]:
+        - paragraph [ref=e11]: 互动叙事 / 文字解密原型
+        - heading "密钥回响" [level=1] [ref=e12]
+        - paragraph [ref=e13]: ECHO OF THE KEY
+        - paragraph [ref=e14]: 你将在废弃观测站里读取残留讯息、拼接线索并选择下一步行动。这个页面已经具备完整游戏界面骨架，后面可以继续往里填剧情、谜题和分支。
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: 当前章节
+          - generic [ref=e18]: 序章
+        - generic [ref=e19]:
+          - generic [ref=e20]: 场景编号
+          - generic [ref=e21]: NODE-00
+        - generic [ref=e22]:
+          - generic [ref=e23]: 解密状态
+          - generic [ref=e24]: 待分析
+        - generic [ref=e25]:
+          - generic [ref=e26]: 核心线索
+          - generic [ref=e27]: 未知口令
+    - generic [ref=e28]:
+      - article [ref=e29]:
+        - generic [ref=e30]:
+          - generic [ref=e31]:
+            - img "废弃观测站" [ref=e32]
+            - generic [ref=e33]:
+              - paragraph [ref=e34]: 废弃观测站
+              - generic [ref=e35]: NODE-00
+          - generic [ref=e36]:
+            - paragraph [ref=e37]: 环境读数
+            - paragraph [ref=e38]: 海面雾层抬升，信号塔仍然在线，终端深处传来断续的加密回响。
+      - generic [ref=e39]:
+        - article [ref=e40]:
+          - generic [ref=e41]:
+            - paragraph [ref=e42]: 中控回路
+            - generic [ref=e43]: SYS / ARCHIVE
+          - paragraph [ref=e44]: 叙事记录
+          - paragraph [ref=e45]: 你推开观测站的外门，主终端在低功耗状态下自行唤醒，吐出第一段未完成的告警。上一次登入记录停在三个月前，访问原因被抹除了。
+          - generic [ref=e46]:
+            - paragraph [ref=e47]: 编码片段
+            - paragraph [ref=e48]: KHOOR / 17-05 / GATE
+        - article [ref=e49]:
+          - paragraph [ref=e50]: 行动选项
+          - generic [ref=e51]:
+            - button "分析 检查终端的原始密文" [ref=e52] [cursor=pointer]:
+              - generic [ref=e53]:
+                - generic [ref=e54]: 分析
+                - generic [ref=e55]: 检查终端的原始密文
+              - generic [ref=e56]: ENTER
+            - button "勘察 先搜索房间里的纸质线索" [ref=e57] [cursor=pointer]:
+              - generic [ref=e58]:
+                - generic [ref=e59]: 勘察
+                - generic [ref=e60]: 先搜索房间里的纸质线索
+              - generic [ref=e61]: ENTER
+            - button "冒进 直接尝试开启内层闸门" [ref=e62] [cursor=pointer]:
+              - generic [ref=e63]:
+                - generic [ref=e64]: 冒进
+                - generic [ref=e65]: 直接尝试开启内层闸门
+              - generic [ref=e66]: ENTER
+          - paragraph [ref=e67]: 告警日志刚刚解封，一条旧讯息等待解析。
+          - generic [ref=e68]:
+            - button "重置流程" [ref=e69] [cursor=pointer]
+            - link "返回主页" [ref=e70] [cursor=pointer]:
+              - /url: ../index.html

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sy历险记</title>
+    <link rel="icon" href="data:,">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="entry-modal is-visible" id="entryModal">
+        <div class="entry-dialog">
+            <p class="entry-kicker">接入前确认</p>
+            <h2 class="entry-title">输入你的名字</h2>
+            <p class="entry-copy">名称最多 6 个字，确认后进入本次记录。</p>
+            <label class="entry-field" for="playerNameInput">
+                <span>访客代号</span>
+                <input id="playerNameInput" type="text" maxlength="6" placeholder="请输入名字" autocomplete="off">
+            </label>
+            <p class="entry-error" id="nameError" hidden>请输入 1 到 6 个字。</p>
+            <button class="secondary-btn entry-btn" id="startGameButton" type="button">开始游戏</button>
+        </div>
+    </div>
+
+    <div class="game-shell">
+        <header class="hero-panel">
+            <div class="hero-minimal">
+                <h1 class="hero-title" id="gameTitle">sy历险记</h1>
+                <div class="chapter-pill">
+                    <span class="chapter-pill-label">章节</span>
+                    <strong class="chapter-pill-value" id="chapterValue">序章</strong>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-panel">
+            <section class="story-card" id="storyCard">
+                <div class="story-topline">
+                    <div>
+                        <p class="story-node" id="sceneCode">NODE-00</p>
+                        <h2 class="story-scene" id="sceneTitle">废弃观测站</h2>
+                    </div>
+                    <p class="story-location" id="locationText">北岸旧区</p>
+                </div>
+
+                <div class="speaker-bar">
+                    <div>
+                        <span class="speaker-name" id="speakerName">中控回路</span>
+                        <span class="speaker-role" id="speakerRole">SYS / ARCHIVE</span>
+                    </div>
+                    <span class="story-statusline" id="statusLine">主终端重新供电，封存日志开始自检。</span>
+                </div>
+
+                <div class="dialogue-block" id="dialogueBlock"></div>
+
+                <div class="cipher-card" id="cipherPanel" hidden>
+                    <p class="cipher-label" id="cipherLabel">异常记录</p>
+                    <pre class="cipher-text" id="cipherText"></pre>
+                </div>
+
+                <p class="story-note" id="storyNote"></p>
+            </section>
+
+            <section class="choices-card">
+                <div class="choices-head">
+                    <h3>行动选项</h3>
+                    <p id="choicesHint">从当前线索中选择下一步。</p>
+                </div>
+                <div class="choices-grid" id="choicesGrid"></div>
+                <div class="footer-actions">
+                    <button class="secondary-btn" id="restartButton" type="button">重新开始</button>
+                    <a class="secondary-btn" href="../index.html">返回主页</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="chapters/prologue.js"></script>
+    <script src="chapters/chapter-01.js"></script>
+    <script src="story.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

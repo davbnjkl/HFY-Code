@@ -1,0 +1,52 @@
+- generic [ref=e2]:
+  - text: ARCHIVE // CIPHER
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: 文字解密
+      - generic [ref=e6]: SCI-FI TERMINAL
+    - generic [ref=e7]:
+      - paragraph [ref=e8]: CIPHER FICTION
+      - heading "密钥回响" [level=1] [ref=e9]
+      - paragraph [ref=e10]: 在断续讯号、失落记录与错误口令之间，逐步拼出真相。
+    - generic [ref=e11]:
+      - article [ref=e12]:
+        - generic [ref=e13]: 章节
+        - strong [ref=e14]: 序章
+      - article [ref=e15]:
+        - generic [ref=e16]: 状态
+        - strong [ref=e17]: 待分析
+      - article [ref=e18]:
+        - generic [ref=e19]: 线索
+        - strong [ref=e20]: 未知口令
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - paragraph [ref=e25]: NODE-00
+          - heading "废弃观测站" [level=2] [ref=e26]
+        - paragraph [ref=e27]: 北岸旧区
+      - generic [ref=e28]:
+        - generic [ref=e29]: 中控回路 SYS / ARCHIVE
+        - generic [ref=e30]: 主终端重新供电，封存日志开始自检。
+      - generic [ref=e31]:
+        - paragraph [ref=e32]: 你推开观测站的外门，尘封多年的控制台忽然自行亮起，像是一直在等某个迟到的访客。
+        - paragraph [ref=e33]: 主屏幕上反复闪烁一条未完成的通行记录，终端要求你先确认残留讯息，再决定是否深入站内。
+      - generic [ref=e34]:
+        - paragraph [ref=e35]: 密文片段
+        - generic [ref=e36]: KHOOR / 17-05 / GATE
+      - paragraph [ref=e37]: 风压正在穿过塔楼的裂缝，远处有微弱回响，像是另一个房间里仍有设备在运转。
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - heading "行动选项" [level=3] [ref=e40]
+        - paragraph [ref=e41]: 先判断该从日志还是密文下手。
+      - generic [ref=e42]:
+        - button "检查终端日志 从文字记录里找出旧口令的来源。" [ref=e43] [cursor=pointer]:
+          - generic [ref=e44]: 检查终端日志
+          - generic [ref=e45]: 从文字记录里找出旧口令的来源。
+        - button "直接分析密文 试着从字符排列里推断它的真实含义。" [ref=e46] [cursor=pointer]:
+          - generic [ref=e47]: 直接分析密文
+          - generic [ref=e48]: 试着从字符排列里推断它的真实含义。
+      - generic [ref=e49]:
+        - button "重新开始" [ref=e50] [cursor=pointer]
+        - link "返回主页" [ref=e51] [cursor=pointer]:
+          - /url: ../index.html
