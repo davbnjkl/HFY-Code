@@ -1,6 +1,6 @@
 (function () {
     const story = window.storyData;
-    const TYPEWRITER_SPEED = 128;
+    const TYPEWRITER_SPEED = 256;
     const BLOCK_PAUSE_MS = 28;
 
     if (!story || !story.nodes || !story.startNode) {
@@ -72,42 +72,189 @@
         return text.replace(/\{\{playerName\}\}/g, playerName || "访客");
     }
 
-    function pulseHaunt(target) {
-        if (!target) {
-            return;
+    function buildTextToken(text, classes) {
+        if (!text) {
+            return null;
         }
 
-        target.classList.remove("haunt-burst");
-        void target.offsetWidth;
-        target.classList.add("haunt-burst");
-
-        window.setTimeout(function () {
-            target.classList.remove("haunt-burst");
-        }, 260);
+        return {
+            text: text,
+            classes: classes || []
+        };
     }
 
-    function scheduleHauntPulse() {
-        window.clearTimeout(hauntTimer);
+    function parseInlineTokens(line, extraClasses) {
+        const tokens = [];
+        const classes = extraClasses || [];
+        let cursor = 0;
 
-        if (document.body.classList.contains("modal-open")) {
-            hauntTimer = window.setTimeout(scheduleHauntPulse, 1800);
-            return;
+        while (cursor < line.length) {
+            if (line.startsWith("**", cursor)) {
+                const closeIndex = line.indexOf("**", cursor + 2);
+
+                if (closeIndex !== -1) {
+                    const strongText = line.slice(cursor + 2, closeIndex);
+                    const token = buildTextToken(strongText, ["inline-strong"].concat(classes));
+
+                    if (token) {
+                        tokens.push(token);
+                    }
+
+                    cursor = closeIndex + 2;
+                    continue;
+                }
+            }
+
+            if (line.charAt(cursor) === "*") {
+                const closeIndex = line.indexOf("*", cursor + 1);
+
+                if (closeIndex !== -1) {
+                    const emText = line.slice(cursor + 1, closeIndex);
+                    const token = buildTextToken(emText, ["inline-em"].concat(classes));
+
+                    if (token) {
+                        tokens.push(token);
+                    }
+
+                    cursor = closeIndex + 1;
+                    continue;
+                }
+            }
+
+            const nextBold = line.indexOf("**", cursor);
+            const nextItalic = line.indexOf("*", cursor);
+            const markerIndexes = [nextBold, nextItalic].filter(function (value) {
+                return value !== -1;
+            });
+            const nextMarker = markerIndexes.length ? Math.min.apply(Math, markerIndexes) : line.length;
+            const plainText = line.slice(cursor, nextMarker);
+            const token = buildTextToken(plainText, classes);
+
+            if (token) {
+                tokens.push(token);
+            }
+
+            cursor = nextMarker;
         }
 
-        hauntTimer = window.setTimeout(function () {
-            const pool = [elements.storyCard, elements.choicesCard, elements.gameShell].filter(Boolean);
-            const target = pool[Math.floor(Math.random() * pool.length)];
-            pulseHaunt(target);
-            scheduleHauntPulse();
-        }, 2600 + Math.random() * 3600);
+        return tokens;
     }
 
-    function typeText(target, text, token) {
+    function parseRichText(text) {
+        const source = text || "";
+        const tokens = [];
+        const lines = source.split("\n");
+
+        lines.forEach(function (line, index) {
+            let workingLine = line;
+            let lineClasses = [];
+
+            if (workingLine.startsWith("【错误规则】")) {
+                tokens.push({
+                    text: "【错误规则】",
+                    classes: ["inline-error-flag"]
+                });
+                tokens.push({
+                    text: " ",
+                    classes: []
+                });
+                workingLine = workingLine.slice("【错误规则】".length).trimStart();
+                lineClasses = ["inline-error"];
+            }
+
+            tokens.push.apply(tokens, parseInlineTokens(workingLine, lineClasses));
+
+            if (index < lines.length - 1) {
+                tokens.push({
+                    text: "\n",
+                    classes: []
+                });
+            }
+        });
+
+        return tokens;
+    }
+
+    function mountRichText(target, text) {
+        const tokens = parseRichText(text);
+        const segments = [];
+
+        target.innerHTML = "";
+
+        tokens.forEach(function (token) {
+            const span = document.createElement("span");
+
+            span.className = token.classes.join(" ");
+            span.textContent = "";
+            target.appendChild(span);
+
+            segments.push({
+                node: span,
+                chars: Array.from(token.text),
+                fullText: token.text
+            });
+        });
+
+        return segments;
+    }
+
+    function setVisibleSegments(segments, visibleCount) {
+        let remaining = visibleCount;
+
+        segments.forEach(function (segment) {
+            if (remaining <= 0) {
+                segment.node.textContent = "";
+                return;
+            }
+
+            if (remaining >= segment.chars.length) {
+                segment.node.textContent = segment.fullText;
+                remaining -= segment.chars.length;
+                return;
+            }
+
+            segment.node.textContent = segment.chars.slice(0, remaining).join("");
+            remaining = 0;
+        });
+    }
+
+    function renderRichText(target, text) {
+        const segments = mountRichText(target, text || "");
+
+        setVisibleSegments(segments, Number.MAX_SAFE_INTEGER);
+    }
+
+    function createTypewriterState(target, text) {
+        const content = text || "";
+        const shell = document.createElement("span");
+        const ghost = document.createElement("span");
+        const live = document.createElement("span");
+
+        shell.className = "typewriter-shell";
+        ghost.className = "typewriter-ghost";
+        live.className = "typewriter-live";
+
+        target.innerHTML = "";
+        shell.append(ghost, live);
+        target.appendChild(shell);
+
+        renderRichText(ghost, content);
+
+        const segments = mountRichText(live, content);
+        setVisibleSegments(segments, 0);
+
+        return {
+            target: target,
+            segments: segments,
+            totalLength: segments.reduce(function (sum, segment) {
+                return sum + segment.chars.length;
+            }, 0)
+        };
+    }
+
+    function typePreparedRichText(state, token) {
         return new Promise(function (resolve) {
-            const content = text || "";
-            const totalLength = content.length;
-
-            target.textContent = "";
+            const totalLength = state.totalLength;
 
             if (!totalLength || token !== renderToken) {
                 resolve(token === renderToken);
@@ -123,7 +270,7 @@
                 }
 
                 if (skipTyping) {
-                    target.textContent = content;
+                    setVisibleSegments(state.segments, Number.MAX_SAFE_INTEGER);
                     resolve(true);
                     return;
                 }
@@ -133,7 +280,7 @@
                     Math.ceil(((now - startedAt) / 1000) * TYPEWRITER_SPEED)
                 );
 
-                target.textContent = content.slice(0, visibleCount);
+                setVisibleSegments(state.segments, visibleCount);
 
                 if (visibleCount >= totalLength) {
                     resolve(true);
@@ -155,11 +302,11 @@
 
         const main = document.createElement("span");
         main.className = "choice-main";
-        main.textContent = resolveText(choice.label || "继续");
+        renderRichText(main, resolveText(choice.label || "继续"));
 
         const sub = document.createElement("span");
         sub.className = "choice-sub";
-        sub.textContent = resolveText(choice.detail || "进入下一段剧情。");
+        renderRichText(sub, resolveText(choice.detail || "进入下一段剧情。"));
 
         button.append(main, sub);
         button.addEventListener("click", function () {
@@ -180,43 +327,59 @@
         elements.dialogueBlock.classList.toggle("is-typing", true);
         elements.storyCard.classList.toggle("is-typing", true);
 
-        for (const line of lines) {
-            if (token !== renderToken) {
-                return;
-            }
-
+        const lineStates = lines.map(function (line) {
             const paragraph = document.createElement("p");
-            paragraph.className = "typed-line";
             elements.dialogueBlock.appendChild(paragraph);
+            return createTypewriterState(paragraph, resolveText(line));
+        });
 
-            await typeText(paragraph, resolveText(line), token);
+        for (const state of lineStates) {
+            state.target.classList.add("typed-line");
+            await typePreparedRichText(state, token);
 
             if (token !== renderToken) {
                 return;
             }
 
-            paragraph.classList.remove("typed-line");
+            state.target.classList.remove("typed-line");
             await wait(BLOCK_PAUSE_MS, token);
+        }
+
+        if (node.cipher) {
+            elements.cipherPanel.hidden = false;
+            renderRichText(elements.cipherLabel, resolveText(node.recordLabel || "残页摘录"));
+            const cipherState = createTypewriterState(elements.cipherText, resolveText(node.cipher));
+            elements.cipherText.classList.add("typed-line");
+            await typePreparedRichText(cipherState, token);
+
+            if (token !== renderToken) {
+                return;
+            }
+
+            elements.cipherText.classList.remove("typed-line");
+            await wait(BLOCK_PAUSE_MS, token);
+        } else {
+            elements.cipherLabel.innerHTML = "";
+            elements.cipherText.innerHTML = "";
+            elements.cipherPanel.hidden = true;
+        }
+
+        if (resolveText(node.note || "")) {
+            const noteState = createTypewriterState(elements.storyNote, resolveText(node.note || ""));
+            elements.storyNote.classList.add("typed-line");
+            await typePreparedRichText(noteState, token);
+
+            if (token !== renderToken) {
+                return;
+            }
+
+            elements.storyNote.classList.remove("typed-line");
+        } else {
+            elements.storyNote.innerHTML = "";
         }
 
         elements.dialogueBlock.classList.toggle("is-typing", false);
         elements.storyCard.classList.toggle("is-typing", false);
-
-        if (node.cipher) {
-            elements.cipherPanel.hidden = false;
-            elements.cipherLabel.textContent = resolveText(node.recordLabel || "异常记录");
-            elements.cipherText.classList.add("typed-line");
-            await typeText(elements.cipherText, resolveText(node.cipher), token);
-            elements.cipherText.classList.remove("typed-line");
-            await wait(BLOCK_PAUSE_MS, token);
-        } else {
-            elements.cipherText.textContent = "";
-            elements.cipherPanel.hidden = true;
-        }
-
-        elements.storyNote.classList.add("typed-line");
-        await typeText(elements.storyNote, resolveText(node.note || ""), token);
-        elements.storyNote.classList.remove("typed-line");
     }
 
     async function renderNode() {
@@ -231,19 +394,20 @@
         isTyping = true;
         const token = renderToken;
 
-        elements.gameTitle.textContent = resolveText(story.title || "sy历险记");
-        elements.chapterValue.textContent = node.chapter || "未知";
-        elements.sceneCode.textContent = resolveText(node.code || "");
-        elements.sceneTitle.textContent = resolveText(node.title || "未命名段落");
-        elements.locationText.textContent = resolveText(node.location || "位置未记录");
-        elements.speakerName.textContent = resolveText(node.speaker || "未知来源");
-        elements.speakerRole.textContent = resolveText(node.role || "");
-        elements.statusLine.textContent = resolveText(node.statusLine || "");
-        elements.choicesHint.textContent = "讯息正在高速展开，点击文本区可立即显示。";
+        renderRichText(elements.gameTitle, resolveText(story.title || "sy历险记"));
+        elements.gameTitle.setAttribute("data-ghost", resolveText(story.title || "sy历险记"));
+        renderRichText(elements.chapterValue, resolveText(node.chapter || "未知"));
+        renderRichText(elements.sceneCode, resolveText(node.code || ""));
+        renderRichText(elements.sceneTitle, resolveText(node.title || "无题残页"));
+        renderRichText(elements.locationText, resolveText(node.location || "地点未明"));
+        renderRichText(elements.speakerName, resolveText(node.speaker || "旧档案来源"));
+        renderRichText(elements.speakerRole, resolveText(node.role || ""));
+        renderRichText(elements.statusLine, resolveText(node.statusLine || ""));
+        renderRichText(elements.choicesHint, "纸页正在显字，点击正文可直接看完。");
         elements.choicesGrid.innerHTML = "";
         elements.choicesGrid.classList.add("is-waiting");
-        elements.storyNote.textContent = "";
-        elements.cipherText.textContent = "";
+        elements.storyNote.innerHTML = "";
+        elements.cipherText.innerHTML = "";
         elements.cipherPanel.hidden = !node.cipher;
 
         await renderNarrative(node, token);
@@ -257,7 +421,7 @@
             elements.choicesGrid.appendChild(createChoiceButton(choice));
         });
 
-        elements.choicesHint.textContent = resolveText(node.choicesHint || "请选择下一步。");
+        renderRichText(elements.choicesHint, resolveText(node.choicesHint || "请从纸页留下的线索里继续。"));
         elements.choicesGrid.classList.remove("is-waiting");
         isTyping = false;
     }
@@ -297,7 +461,7 @@
         elements.entryModal.classList.remove("is-visible");
         document.body.classList.remove("modal-open");
         renderNode();
-        scheduleHauntPulse();
+        window.clearTimeout(hauntTimer);
     }
 
     elements.startGameButton.addEventListener("click", startGame);

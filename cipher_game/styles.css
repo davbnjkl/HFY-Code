@@ -1,17 +1,18 @@
 :root {
-    --bg-base: #060406;
-    --bg-deep: rgba(15, 10, 12, 0.62);
-    --panel: rgba(20, 12, 14, 0.62);
-    --panel-strong: rgba(12, 7, 9, 0.78);
-    --line: rgba(183, 82, 70, 0.24);
-    --line-strong: rgba(223, 115, 100, 0.42);
-    --text-main: #f3ebe5;
-    --text-soft: #bca89c;
-    --accent: #df7364;
-    --accent-strong: #ff8e6f;
-    --warn: #d7a56b;
-    --success: #dcb89c;
-    --shadow-red: rgba(120, 34, 28, 0.2);
+    --bg-base: #020202;
+    --page-bg-image: url("../images/sy-lixianji-bg.webp");
+    --bg-deep: rgba(10, 10, 10, 0.88);
+    --panel: rgba(24, 23, 22, 0.9);
+    --panel-strong: rgba(12, 11, 10, 0.96);
+    --line: rgba(91, 76, 67, 0.34);
+    --line-strong: rgba(145, 58, 54, 0.5);
+    --text-main: #d8d0c8;
+    --text-soft: #8e8178;
+    --accent: #b04b46;
+    --accent-strong: #d66a63;
+    --warn: #b19277;
+    --success: #bca899;
+    --shadow-red: rgba(81, 18, 18, 0.22);
 }
 
 * {
@@ -21,13 +22,10 @@
 body {
     margin: 0;
     min-height: 100vh;
-    font-family: "Rajdhani", "Noto Sans SC", sans-serif;
+    position: relative;
+    isolation: isolate;
+    font-family: "Noto Sans SC", sans-serif;
     color: var(--text-main);
-    background:
-        radial-gradient(circle at 16% 20%, rgba(255, 112, 92, 0.08), transparent 24%),
-        radial-gradient(circle at 80% 14%, rgba(150, 38, 38, 0.12), transparent 22%),
-        linear-gradient(180deg, rgba(6, 4, 6, 0.18), rgba(6, 4, 6, 0.46)),
-        url("../images/sy-lixianji-bg.png") center / cover no-repeat fixed;
     background-color: var(--bg-base);
     padding: clamp(12px, 2vw, 26px);
 }
@@ -46,37 +44,35 @@ body::after {
 
 body::before {
     background:
-        linear-gradient(rgba(255, 255, 255, 0.016) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
-        radial-gradient(circle at 50% 50%, rgba(28, 14, 18, 0.08), transparent 56%);
-    background-size: 84px 84px, 84px 84px, 100% 100%;
-    opacity: 0.2;
-    mix-blend-mode: screen;
+        radial-gradient(circle at 20% 16%, rgba(75, 18, 18, 0.14), transparent 30%),
+        radial-gradient(circle at 82% 10%, rgba(25, 25, 25, 0.42), transparent 24%),
+        linear-gradient(180deg, rgba(9, 9, 9, 0.58), rgba(3, 3, 3, 0.82)),
+        var(--page-bg-image) center / cover no-repeat;
+    z-index: -2;
 }
 
 body::after {
     background:
-        radial-gradient(circle at center, transparent 36%, rgba(0, 0, 0, 0.5) 100%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 16%, transparent 84%, rgba(80, 16, 16, 0.08));
+        radial-gradient(circle at center, transparent 28%, rgba(0, 0, 0, 0.82) 100%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent 18%, transparent 82%, rgba(98, 22, 22, 0.1)),
+        radial-gradient(circle at 50% 42%, rgba(22, 22, 22, 0.34), transparent 60%),
+        repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.008) 0 1px, transparent 1px 6px);
+    opacity: 1;
+    mix-blend-mode: normal;
+    z-index: -1;
 }
 
 .game-shell {
     position: relative;
     width: min(100%, 980px);
     margin: 0 auto;
-    padding: clamp(16px, 2vw, 24px);
-    border: 1px solid var(--line);
-    border-radius: 24px 8px 24px 8px;
-    background:
-        linear-gradient(180deg, rgba(18, 10, 12, 0.5), rgba(8, 4, 6, 0.72)),
-        linear-gradient(120deg, rgba(255, 143, 115, 0.03), transparent 38%, rgba(40, 12, 12, 0.2));
-    box-shadow:
-        0 26px 64px rgba(0, 0, 0, 0.42),
-        0 0 42px var(--shadow-red),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.03),
-        inset 0 0 80px rgba(0, 0, 0, 0.18);
-    backdrop-filter: blur(9px) saturate(0.92);
-    overflow: hidden;
+    padding: clamp(10px, 2vw, 18px);
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    overflow: visible;
 }
 
 .game-shell::before {
@@ -85,9 +81,9 @@ body::after {
     inset: 0;
     pointer-events: none;
     background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent 20%, transparent 76%, rgba(97, 22, 18, 0.08)),
-        repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.008) 0 2px, transparent 2px 6px);
-    opacity: 0.34;
+        radial-gradient(circle at 18% 12%, rgba(88, 56, 32, 0.08), transparent 18%),
+        radial-gradient(circle at 84% 78%, rgba(52, 27, 16, 0.16), transparent 24%);
+    opacity: 0.5;
 }
 
 .entry-modal {
@@ -101,7 +97,7 @@ body::after {
     background:
         radial-gradient(circle at center, rgba(62, 16, 14, 0.18), rgba(0, 0, 0, 0.64)),
         rgba(4, 2, 4, 0.58);
-    backdrop-filter: blur(12px) saturate(0.86);
+    backdrop-filter: blur(10px) saturate(0.8);
 }
 
 .entry-modal.is-visible {
@@ -111,14 +107,14 @@ body::after {
 .entry-dialog {
     width: min(100%, 420px);
     padding: 20px;
-    border: 1px solid rgba(183, 82, 70, 0.24);
-    border-radius: 18px 8px 18px 8px;
+    border: 1px solid rgba(110, 49, 45, 0.3);
+    border-radius: 10px;
     background:
-        linear-gradient(180deg, rgba(16, 10, 12, 0.92), rgba(7, 4, 6, 0.96)),
-        linear-gradient(120deg, rgba(223, 115, 100, 0.08), transparent 46%);
+        linear-gradient(180deg, rgba(22, 21, 20, 0.95), rgba(9, 9, 9, 0.98)),
+        linear-gradient(90deg, rgba(116, 32, 32, 0.08), transparent 30%, transparent 74%, rgba(54, 26, 26, 0.08));
     box-shadow:
         0 24px 54px rgba(0, 0, 0, 0.46),
-        0 0 28px rgba(124, 26, 22, 0.14);
+        0 0 28px rgba(56, 28, 18, 0.14);
 }
 
 .entry-kicker,
@@ -126,19 +122,20 @@ body::after {
 .chapter-pill-label {
     margin: 0;
     color: var(--text-soft);
-    font-family: "Orbitron", "Noto Sans SC", sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.16em;
+    font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
 }
 
 .entry-title {
     margin: 10px 0 0;
-    font-size: 1.4rem;
+    font-family: "Noto Serif SC", serif;
+    font-size: 1.46rem;
 }
 
 .entry-copy {
     margin: 10px 0 0;
-    color: #e0cfc5;
+    color: #b9aba0;
     line-height: 1.7;
 }
 
@@ -152,9 +149,9 @@ body::after {
     width: 100%;
     min-height: 48px;
     padding: 0 14px;
-    border: 1px solid rgba(223, 115, 100, 0.18);
-    border-radius: 12px 6px 12px 6px;
-    background: rgba(7, 4, 6, 0.78);
+    border: 1px solid rgba(97, 82, 73, 0.28);
+    border-radius: 8px;
+    background: rgba(12, 12, 12, 0.88);
     color: var(--text-main);
     font: inherit;
     font-size: 1rem;
@@ -162,8 +159,8 @@ body::after {
 }
 
 .entry-field input:focus {
-    border-color: rgba(223, 115, 100, 0.42);
-    box-shadow: 0 0 18px rgba(124, 26, 22, 0.14);
+    border-color: rgba(173, 127, 94, 0.42);
+    box-shadow: 0 0 0 2px rgba(110, 79, 54, 0.14);
 }
 
 .entry-field input::placeholder {
@@ -182,29 +179,33 @@ body::after {
 }
 
 .game-shell::after {
-    content: "";
-    position: absolute;
-    inset: 12px;
-    border: 1px solid rgba(183, 82, 70, 0.1);
-    border-radius: 18px 6px 18px 6px;
-    pointer-events: none;
+    content: none;
 }
 
 .hero-panel,
 .story-card,
 .choices-card {
     position: relative;
-    border: 1px solid var(--line);
+    color: var(--text-main);
+    border: 1px solid rgba(89, 79, 72, 0.2);
+    clip-path: polygon(0 2.4%, 2.4% 0.8%, 6.8% 1.8%, 12.4% 0.2%, 18% 1.6%, 24.8% 0, 33% 2%, 44% 0.4%, 56% 1.8%, 69% 0.2%, 80.8% 2.2%, 92% 0.4%, 100% 2.8%, 99.1% 10.5%, 100% 19%, 98.8% 31%, 100% 44%, 98.6% 56%, 100% 69%, 98.9% 82%, 100% 94%, 96.8% 100%, 87% 98.8%, 75% 100%, 63% 98.6%, 50% 100%, 38% 98.4%, 26% 100%, 15% 98.7%, 5% 100%, 0 96.8%, 1.1% 85%, 0 72%, 1.2% 60%, 0 47%, 1.1% 34%, 0 21%, 0.8% 11%);
     background:
-        linear-gradient(180deg, rgba(20, 12, 14, 0.74), rgba(8, 5, 6, 0.86)),
-        linear-gradient(120deg, rgba(223, 115, 100, 0.05), transparent 42%, rgba(255, 194, 126, 0.03));
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(12px) saturate(0.88);
+        linear-gradient(180deg, rgba(38, 36, 34, 0.96), rgba(24, 23, 22, 0.98)),
+        linear-gradient(90deg, rgba(125, 42, 42, 0.06), transparent 20%, transparent 80%, rgba(49, 44, 40, 0.08)),
+        radial-gradient(circle at 80% 20%, rgba(114, 29, 29, 0.08), transparent 16%),
+        radial-gradient(circle at 14% 82%, rgba(74, 49, 29, 0.05), transparent 22%);
+    box-shadow:
+        0 18px 34px rgba(0, 0, 0, 0.42),
+        0 2px 0 rgba(30, 26, 24, 0.22),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+        inset 0 0 48px rgba(0, 0, 0, 0.28);
+    backdrop-filter: none;
 }
 
 .hero-panel {
     padding: 16px 18px;
-    border-radius: 18px 8px 18px 8px;
+    border-radius: 4px;
+    transform: rotate(-0.5deg);
 }
 
 .hero-minimal {
@@ -221,14 +222,19 @@ body::after {
     gap: 10px;
     min-height: 38px;
     padding: 8px 12px;
-    border: 1px solid rgba(223, 115, 100, 0.18);
-    background: rgba(29, 15, 16, 0.54);
-    box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(140, 53, 49, 0.34);
+    border-radius: 999px;
+    background: rgba(116, 37, 37, 0.12);
+    box-shadow:
+        inset 0 0 12px rgba(140, 58, 46, 0.05),
+        0 0 0 2px rgba(133, 57, 47, 0.05);
 }
 
 .chapter-pill-value {
     font-size: 1rem;
     line-height: 1;
+    font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+    color: #cfbbb0;
 }
 
 .hero-panel {
@@ -250,17 +256,63 @@ body::after {
 .cipher-label,
 .speaker-role {
     margin: 0;
-    font-family: "Orbitron", "Noto Sans SC", sans-serif;
-    letter-spacing: 0.16em;
+    font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+    letter-spacing: 0.14em;
 }
 
 .hero-title {
     margin: 0;
-    font-family: "Orbitron", "Noto Sans SC", sans-serif;
-    font-size: clamp(1.7rem, 4vw, 2.6rem);
-    line-height: 1;
-    letter-spacing: 0.08em;
-    text-shadow: 0 0 20px rgba(138, 38, 30, 0.28);
+    position: relative;
+    font-family: "ZCOOL XiaoWei", "Noto Serif SC", serif;
+    font-size: clamp(2rem, 4.6vw, 3rem);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: 0.12em;
+    color: #d9c9c0;
+    text-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.58),
+        0 2px 10px rgba(0, 0, 0, 0.2),
+        0 0 18px rgba(119, 27, 27, 0.18);
+}
+
+.hero-title::before {
+    content: attr(data-ghost);
+    position: absolute;
+    inset: 0;
+    color: rgba(153, 42, 42, 0.18);
+    transform: translate(2px, 1px) rotate(-1.2deg);
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+.hero-title::after {
+    content: "机密封存";
+    display: block;
+    margin-top: 6px;
+    color: rgba(174, 82, 72, 0.82);
+    font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+    font-size: clamp(0.72rem, 1.6vw, 0.9rem);
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-shadow: none;
+}
+
+.hero-panel::after {
+    content: "已封";
+    position: absolute;
+    right: 18px;
+    top: 16px;
+    padding: 6px 10px;
+    border: 2px solid rgba(150, 42, 42, 0.54);
+    border-radius: 999px;
+    color: rgba(170, 48, 48, 0.8);
+    font-family: "Noto Serif SC", serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    transform: rotate(9deg);
+    opacity: 0.78;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
 }
 
 .game-panel {
@@ -272,74 +324,132 @@ body::after {
 .story-card,
 .choices-card {
     padding: 16px;
-    border-radius: 18px 8px 18px 8px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
+.story-card {
+    transform: rotate(0.35deg);
+}
+
+.choices-card {
+    transform: rotate(-0.3deg);
+}
+
 .story-card::before,
-.choices-card::before {
+.choices-card::before,
+.hero-panel::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
     background:
-        repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.016) 0 2px, transparent 2px 6px),
-        linear-gradient(90deg, transparent 0 22%, rgba(255, 142, 111, 0.04) 22% 24%, transparent 24% 100%);
-    opacity: 0.18;
-    mix-blend-mode: screen;
-    animation: panel-flicker 8.6s steps(1) infinite;
+        radial-gradient(circle at 16px 16px, rgba(12, 12, 12, 0.62) 0 4px, transparent 5px),
+        radial-gradient(circle at calc(100% - 18px) 20px, rgba(12, 12, 12, 0.46) 0 3px, transparent 4px),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 16%, transparent 82%, rgba(105, 21, 21, 0.12)),
+        linear-gradient(102deg, transparent 0 47%, rgba(141, 126, 114, 0.08) 48%, transparent 49%),
+        linear-gradient(84deg, transparent 0 63%, rgba(87, 75, 68, 0.1) 64%, transparent 65%),
+        radial-gradient(circle at 82% 18%, rgba(120, 26, 26, 0.18), transparent 20%),
+        radial-gradient(circle at 18% 76%, rgba(38, 38, 38, 0.2), transparent 26%),
+        radial-gradient(circle at 8% 88%, rgba(92, 34, 34, 0.24), transparent 10%),
+        radial-gradient(circle at 92% 10%, rgba(73, 31, 24, 0.22), transparent 10%),
+        radial-gradient(circle at 34% 28%, rgba(74, 61, 47, 0.18), transparent 13%),
+        radial-gradient(circle at 72% 74%, rgba(40, 40, 40, 0.22), transparent 14%),
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.016) 0 1px, transparent 1px 8px);
+    opacity: 0.78;
 }
 
-.story-card::after {
+.story-card::after,
+.choices-card::after {
     content: "";
     position: absolute;
-    left: -6%;
-    right: -6%;
-    top: -28%;
-    height: 24%;
+    inset: 0;
     pointer-events: none;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 137, 112, 0.11), rgba(255, 255, 255, 0.02));
-    opacity: 0.18;
-    filter: blur(10px);
-    animation: static-roll 11s linear infinite;
+    background:
+        radial-gradient(circle at 0 0, rgba(0, 0, 0, 0.84) 0 28px, rgba(91, 42, 24, 0.3) 29px, transparent 36px),
+        radial-gradient(circle at 100% 0, rgba(0, 0, 0, 0.78) 0 24px, rgba(91, 42, 24, 0.22) 25px, transparent 32px),
+        radial-gradient(circle at 0 100%, rgba(0, 0, 0, 0.72) 0 30px, rgba(88, 31, 25, 0.28) 31px, transparent 40px),
+        radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.84) 0 34px, rgba(88, 31, 25, 0.24) 35px, transparent 44px),
+        radial-gradient(circle at 4% 48%, rgba(0, 0, 0, 0.4) 0 12px, transparent 18px),
+        radial-gradient(circle at 96% 54%, rgba(0, 0, 0, 0.38) 0 10px, transparent 16px),
+        linear-gradient(90deg, transparent 0 11%, rgba(164, 60, 60, 0.14) 11.4%, transparent 11.8%),
+        linear-gradient(92deg, transparent 0 64%, rgba(200, 74, 74, 0.14) 64.4%, transparent 64.8%),
+        linear-gradient(165deg, transparent 0 62%, rgba(128, 32, 32, 0.18) 63%, transparent 64%),
+        linear-gradient(18deg, transparent 0 48%, rgba(88, 20, 20, 0.14) 49%, transparent 50%),
+        radial-gradient(circle at 88% 12%, rgba(101, 32, 24, 0.12), transparent 12%),
+        radial-gradient(circle at 10% 88%, rgba(66, 43, 24, 0.08), transparent 16%);
+    opacity: 0.9;
+    filter: blur(9px);
+    animation: none;
 }
 
 .story-node {
     color: var(--accent);
-    font-size: 0.68rem;
-    text-shadow: 0 0 12px rgba(223, 115, 100, 0.24);
+    font-size: 0.82rem;
+    text-shadow: none;
+    opacity: 0.88;
+    position: relative;
+}
+
+.story-node::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: 4px;
+    top: 54%;
+    height: 2px;
+    background: rgba(146, 52, 45, 0.52);
+    transform: rotate(-1.2deg);
+    opacity: 0.7;
 }
 
 .story-scene {
     margin: 4px 0 0;
-    font-size: clamp(1.2rem, 2.4vw, 1.65rem);
-    line-height: 1.15;
+    font-family: "Noto Serif SC", serif;
+    font-size: clamp(1.26rem, 2.5vw, 1.72rem);
+    line-height: 1.22;
+    color: #ddd2c9;
 }
 
 .story-location,
 .story-statusline,
 .choices-head p {
     margin: 0;
-    color: var(--text-soft);
+    color: #85776e;
     font-size: 0.92rem;
 }
 
 .speaker-bar {
     margin-top: 12px;
     padding: 10px 12px;
-    border: 1px solid rgba(183, 82, 70, 0.16);
-    background: rgba(18, 10, 12, 0.54);
+    border: none;
+    border-left: 3px solid rgba(146, 52, 45, 0.42);
+    border-radius: 0;
+    background: rgba(112, 28, 28, 0.08);
+    position: relative;
+}
+
+.speaker-bar::after {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    width: 72px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(155, 51, 51, 0.46), transparent);
+    transform: rotate(-4deg);
 }
 
 .speaker-name {
-    font-size: 1.02rem;
+    font-family: "Noto Serif SC", serif;
+    font-size: 1.04rem;
     font-weight: 700;
 }
 
 .speaker-role {
     margin-left: 8px;
     color: var(--accent);
-    font-size: 0.66rem;
+    font-size: 0.78rem;
 }
 
 .dialogue-block {
@@ -357,17 +467,81 @@ body::after {
 .dialogue-block p,
 .story-note {
     margin: 0;
-    font-family: "Noto Sans SC", sans-serif;
+    font-family: "Noto Serif SC", serif;
     font-size: 0.98rem;
-    line-height: 1.78;
-    color: #f1e7df;
+    line-height: 1.9;
+    color: #d5ccc4;
     word-break: break-word;
 }
 
 .dialogue-block p,
 .story-note,
 .cipher-text {
-    animation: text-flicker 9.4s steps(1) infinite;
+    animation: none;
+}
+
+.typewriter-shell {
+    display: grid;
+    width: 100%;
+}
+
+.typewriter-shell > * {
+    grid-area: 1 / 1;
+}
+
+.typewriter-ghost {
+    visibility: hidden;
+    user-select: none;
+    pointer-events: none;
+}
+
+.typewriter-live {
+    min-width: 0;
+    white-space: inherit;
+}
+
+.inline-strong {
+    font-weight: 900;
+    font-size: 1.08em;
+    letter-spacing: 0.03em;
+    color: #e4d2bf;
+    text-shadow: 0 0 12px rgba(132, 45, 45, 0.12);
+}
+
+.inline-em {
+    font-style: italic;
+    color: #b39a92;
+}
+
+.inline-error-flag {
+    display: inline-block;
+    margin-right: 0.16em;
+    padding: 0 0.36em;
+    border: 1px solid rgba(179, 99, 78, 0.32);
+    border-radius: 999px;
+    background: rgba(78, 24, 18, 0.44);
+    color: #e2a7a0;
+    font-size: 0.82em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    vertical-align: 0.04em;
+    text-shadow: 0 0 10px rgba(160, 36, 28, 0.28);
+}
+
+.inline-error {
+    color: #d88f86;
+    text-shadow: 0 0 10px rgba(92, 34, 24, 0.16);
+}
+
+.inline-error.inline-em,
+.inline-error .inline-em {
+    color: #ff8c86;
+}
+
+.cipher-text .inline-strong,
+.choice-main .inline-strong,
+.choice-sub .inline-strong {
+    font-size: 1.14em;
 }
 
 .typed-line::after {
@@ -377,43 +551,53 @@ body::after {
     height: 1.02em;
     margin-left: 6px;
     vertical-align: -0.12em;
-    background: rgba(255, 128, 98, 0.84);
-    box-shadow: 0 0 12px rgba(145, 40, 30, 0.38);
+    background: rgba(183, 73, 73, 0.84);
+    box-shadow: 0 0 12px rgba(111, 22, 22, 0.3);
     animation: blink-caret 0.66s steps(1) infinite;
 }
 
 .cipher-card {
     margin-top: 14px;
     padding: 12px;
-    border: 1px solid rgba(183, 82, 70, 0.18);
+    border: 1px dashed rgba(146, 60, 54, 0.42);
     background:
-        linear-gradient(180deg, rgba(10, 6, 8, 0.78), rgba(16, 8, 8, 0.62)),
-        rgba(7, 4, 6, 0.72);
-    border-radius: 14px 6px 14px 6px;
+        linear-gradient(180deg, rgba(41, 37, 35, 0.94), rgba(27, 25, 24, 0.96)),
+        radial-gradient(circle at 86% 18%, rgba(124, 37, 37, 0.16), transparent 18%),
+        radial-gradient(circle at 20% 80%, rgba(54, 54, 54, 0.16), transparent 18%);
+    border-radius: 2px;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 248, 238, 0.14),
+        inset 0 0 30px rgba(0, 0, 0, 0.22);
+    clip-path: polygon(0 2%, 6% 0, 18% 1.4%, 34% 0.2%, 49% 1.6%, 67% 0.3%, 84% 1.4%, 100% 0, 99% 16%, 100% 36%, 98.8% 58%, 100% 80%, 97.6% 100%, 84% 99.1%, 64% 100%, 42% 98.8%, 20% 100%, 3% 98.8%, 0 95%, 0.8% 76%, 0 52%, 0.7% 30%, 0 15%);
 }
 
 .cipher-label {
-    color: var(--warn);
-    font-size: 0.68rem;
+    display: inline-block;
+    color: #c75b52;
+    font-size: 0.76rem;
+    padding: 2px 8px;
+    border: 1px solid rgba(171, 65, 58, 0.36);
+    border-radius: 999px;
+    background: rgba(143, 64, 52, 0.12);
 }
 
 .cipher-text {
     margin: 8px 0 0;
     white-space: pre-wrap;
     word-break: break-word;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "Noto Serif SC", serif;
     font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--success);
-    text-shadow: 0 0 10px rgba(144, 96, 72, 0.16);
+    line-height: 1.78;
+    color: #d1c4b7;
+    text-shadow: none;
 }
 
 .story-note {
     margin-top: 12px;
     padding: 10px 12px;
-    border-left: 2px solid rgba(223, 115, 100, 0.42);
-    background: rgba(22, 12, 14, 0.44);
-    color: #dbc9bf;
+    border-left: 3px solid rgba(148, 59, 53, 0.42);
+    background: rgba(112, 28, 28, 0.08);
+    color: #cdbfb3;
 }
 
 .choices-head {
@@ -424,8 +608,10 @@ body::after {
 
 .choices-head h3 {
     margin: 0;
-    font-size: 1rem;
-    letter-spacing: 0.08em;
+    font-family: "ZCOOL XiaoWei", "Noto Serif SC", serif;
+    font-size: 1.04rem;
+    letter-spacing: 0.06em;
+    color: #d2c4ba;
 }
 
 .choices-grid {
@@ -441,13 +627,14 @@ body::after {
 .choice-btn,
 .secondary-btn {
     appearance: none;
-    border: 1px solid rgba(183, 82, 70, 0.24);
+    border: 1px solid rgba(89, 79, 72, 0.32);
     background:
-        linear-gradient(135deg, rgba(22, 12, 14, 0.76), rgba(8, 4, 6, 0.94)),
-        rgba(12, 6, 8, 0.54);
-    color: var(--text-main);
+        linear-gradient(180deg, rgba(36, 34, 33, 0.96), rgba(21, 20, 19, 0.98)),
+        linear-gradient(90deg, rgba(120, 32, 32, 0.06), transparent 24%, rgba(49, 44, 40, 0.08));
+    color: #d3c7bc;
     text-decoration: none;
-    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+    transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .choice-btn {
@@ -456,57 +643,31 @@ body::after {
     padding: 12px 14px;
     text-align: left;
     cursor: pointer;
-    border-radius: 14px 6px 14px 6px;
+    border-radius: 8px;
     overflow: hidden;
     isolation: isolate;
 }
 
 .choice-btn::before,
 .secondary-btn::before {
-    content: "";
-    position: absolute;
-    top: -12%;
-    left: -38%;
-    width: 24%;
-    height: 124%;
-    background: linear-gradient(90deg, transparent, rgba(255, 164, 142, 0.42), transparent);
-    opacity: 0;
-    transform: skewX(-18deg);
-    pointer-events: none;
+    content: none;
 }
 
 .choice-btn::after,
 .secondary-btn::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(255, 150, 126, 0.14);
-    opacity: 0;
-    pointer-events: none;
+    content: none;
 }
 
 .choice-btn:hover,
 .secondary-btn:hover {
-    transform: translateY(-1px);
+    transform: translateY(-1px) rotate(-0.2deg);
     border-color: var(--line-strong);
-    box-shadow: 0 0 18px rgba(124, 26, 22, 0.18);
-}
-
-.choice-btn:hover::before,
-.secondary-btn:hover::before {
-    opacity: 1;
-    animation: hover-sweep 0.34s linear 1;
-}
-
-.choice-btn:hover::after,
-.secondary-btn:hover::after {
-    opacity: 0.72;
-    animation: border-glitch 0.22s steps(2) 1;
+    box-shadow: 0 10px 20px rgba(44, 28, 18, 0.16);
 }
 
 .choice-btn:hover .choice-main,
 .choice-btn:hover .choice-sub {
-    animation: hover-jitter 0.18s steps(2) 2;
+    animation: none;
 }
 
 .choice-main {
@@ -515,26 +676,27 @@ body::after {
     font-weight: 700;
     line-height: 1.45;
     word-break: break-word;
+    font-family: "Noto Serif SC", serif;
 }
 
 .choice-sub {
     display: block;
     margin-top: 4px;
-    color: var(--text-soft);
+    color: #948780;
     font-size: 0.86rem;
     line-height: 1.45;
     word-break: break-word;
 }
 
 .choice-btn[data-tone="alert"] {
-    border-color: rgba(215, 165, 107, 0.32);
+    border-color: rgba(168, 121, 68, 0.34);
 }
 
 .choice-btn[data-tone="risk"] {
-    border-color: rgba(255, 120, 102, 0.34);
+    border-color: rgba(159, 70, 50, 0.32);
     background:
-        linear-gradient(135deg, rgba(34, 10, 10, 0.82), rgba(12, 4, 6, 0.96)),
-        rgba(14, 6, 8, 0.56);
+        linear-gradient(180deg, rgba(48, 25, 25, 0.96), rgba(22, 15, 15, 0.98)),
+        linear-gradient(90deg, rgba(133, 35, 35, 0.08), transparent 26%, rgba(114, 43, 41, 0.08));
 }
 
 .footer-actions {
@@ -547,7 +709,7 @@ body::after {
     justify-content: center;
     min-height: 40px;
     padding: 0 14px;
-    border-radius: 12px 6px 12px 6px;
+    border-radius: 8px;
     cursor: pointer;
     font-family: inherit;
     font-size: 0.95rem;
@@ -696,6 +858,10 @@ body::after {
 }
 
 @media (max-width: 760px) {
+    :root {
+        --page-bg-image: url("../images/sy-lixianji-bg-mobile.webp");
+    }
+
     body {
         padding: 10px;
     }

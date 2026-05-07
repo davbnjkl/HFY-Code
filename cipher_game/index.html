@@ -7,28 +7,28 @@
     <link rel="icon" href="data:,">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@500;700;900&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="entry-modal is-visible" id="entryModal">
         <div class="entry-dialog">
-            <p class="entry-kicker">接入前确认</p>
-            <h2 class="entry-title">输入你的名字</h2>
-            <p class="entry-copy">名称最多 6 个字，确认后进入本次记录。</p>
+            <p class="entry-kicker">借阅登记</p>
+            <h2 class="entry-title">写下你的名字</h2>
+            <p class="entry-copy">姓名最多 6 个字，落款后翻开这份残卷。</p>
             <label class="entry-field" for="playerNameInput">
-                <span>访客代号</span>
+                <span>档案落款</span>
                 <input id="playerNameInput" type="text" maxlength="6" placeholder="请输入名字" autocomplete="off">
             </label>
             <p class="entry-error" id="nameError" hidden>请输入 1 到 6 个字。</p>
-            <button class="secondary-btn entry-btn" id="startGameButton" type="button">开始游戏</button>
+            <button class="secondary-btn entry-btn" id="startGameButton" type="button">翻开档案</button>
         </div>
     </div>
 
     <div class="game-shell">
         <header class="hero-panel">
             <div class="hero-minimal">
-                <h1 class="hero-title" id="gameTitle">sy历险记</h1>
+                <h1 class="hero-title" id="gameTitle" data-ghost="sy历险记">sy历险记</h1>
                 <div class="chapter-pill">
                     <span class="chapter-pill-label">章节</span>
                     <strong class="chapter-pill-value" id="chapterValue">序章</strong>
@@ -66,12 +66,12 @@
 
             <section class="choices-card">
                 <div class="choices-head">
-                    <h3>行动选项</h3>
+                    <h3>下一步</h3>
                     <p id="choicesHint">从当前线索中选择下一步。</p>
                 </div>
                 <div class="choices-grid" id="choicesGrid"></div>
                 <div class="footer-actions">
-                    <button class="secondary-btn" id="restartButton" type="button">重新开始</button>
+                    <button class="secondary-btn" id="restartButton" type="button">重新翻看</button>
                     <a class="secondary-btn" href="../index.html">返回主页</a>
                 </div>
             </section>
@@ -80,6 +80,8 @@
 
     <script src="chapters/prologue.js"></script>
     <script src="chapters/chapter-01.js"></script>
+    <script src="chapters/chapter-02.js"></script>
+    <script src="chapters/chapter-03-pending.js"></script>
     <script src="story.js"></script>
     <script src="app.js"></script>
 </body>

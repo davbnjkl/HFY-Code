@@ -982,6 +982,7 @@
     <style id="sci-fi-overrides">
         :root {
             --page-pad: clamp(18px, 2.5vw, 38px);
+            --page-bg-image: url('images/bg1.webp');
             --bg-0: #020611;
             --bg-1: #061225;
             --bg-2: #0a1c33;
@@ -1008,8 +1009,14 @@
                 radial-gradient(circle at 18% 18%, rgba(29, 207, 255, 0.08), transparent 24%),
                 radial-gradient(circle at 82% 12%, rgba(113, 242, 255, 0.06), transparent 18%),
                 radial-gradient(circle at 50% 78%, rgba(23, 105, 255, 0.07), transparent 26%),
-                url('images/bg1.png') center / cover no-repeat fixed;
+                var(--page-bg-image) center / cover no-repeat;
             background-color: var(--bg-0);
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --page-bg-image: url('images/bg1-mobile.webp');
+            }
         }
 
         body::before,
